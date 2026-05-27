@@ -1,5 +1,5 @@
 <h1>Buat data staff baru</h1>
-<form method="POST" action="{{ route('staff.store') }}">
+<form method="POST" action="{{ route('Staff.store') }}">
   @csrf
   NIP:
   <br>

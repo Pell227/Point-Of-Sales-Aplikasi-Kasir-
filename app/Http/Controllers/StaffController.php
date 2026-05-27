@@ -11,12 +11,13 @@ class StaffController extends Controller
     public function index()
     {
         $staff = Staff::all();
-        return view('staff.index', compact('staff'));
+
+        return view('Staff.index', compact('staff'));
     }
 
     public function create()
     {
-        return view('staff.create');
+        return view('Staff.create');
     }
 
     public function store(Request $request)
@@ -31,17 +32,17 @@ class StaffController extends Controller
 
         Staff::create($request->only('NIP','name','position','email','phone_number'));
 
-        return redirect()->route('staff.index')->with('Success', 'Staff created successfully.');
+        return redirect()->route('Staff.index')->with('Success', 'Staff created successfully.');
     }
 
     public function show(Staff $staff)
     {
-        return view('staff.show', compact('staff'));
+        return view('Staff.show', compact('staff'));
     }
 
     public function edit(Staff $staff)
     {
-        return view('staff.edit', compact('staff'));
+        return view('Staff.edit', compact('staff'));
     }
 
     public function update(Request $request, Staff $staff)
@@ -56,13 +57,13 @@ class StaffController extends Controller
 
         $staff->update($request->only('NIP','name','position','email','phone_number'));
 
-        return redirect()->route('staff.index')->with('Success', 'Staff updated successfully');
+        return redirect()->route('Staff.index')->with('Success', 'Staff updated successfully');
     }
 
     public function destroy(Staff $staff)
     {
         $staff->delete();
 
-        return redirect()->route('staff.index')->with('Success', 'Staff deleted successfully');
+        return redirect()->route('Staff.index')->with('Success', 'Staff deleted successfully');
     }
 }

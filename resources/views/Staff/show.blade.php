@@ -5,4 +5,4 @@
 <p>{{ $staff->Email }}</p>
 <p>{{ $staff->Nomor Telepon }}</p>
 
-<a href="{{ route('staff.index') }}">Back</a>
+<a href="{{ route('Staff.index') }}">Back</a>

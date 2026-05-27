@@ -1,6 +1,6 @@
 <h1> Daftar Data Staff </h1>
 
-<a href="{{ route('staff.create') }}">Tambah Staff Baru</a>
+<a href="{{ route('Staff.create') }}">Tambah Staff Baru</a>
 <br><br>
 
 @if ($staff->isEmpty())
@@ -22,7 +22,7 @@
     <tr>
       <td style="text-align: center">{{ $loop->iteration}}</td>
       <td>
-        <a href="{{ route('staff.show', $s) }}">
+        <a href="{{ route('Staff.show', $s) }}">
           {{ $s->NIP }}
         </a>
       </td>
@@ -31,8 +31,8 @@
       <td> {{ $s->email }}</td>
       <td> {{ $s->nomor_telepon }}</td>
       <td style="text-align: center">
-        <a href="{{ route('staff.edit', $s) }}">Edit</a>
-        <form action="{{ route('staff.destroy', $s) }}" method="POST" style="display: inline;">
+        <a href="{{ route('Staff.edit', $s) }}">Edit</a>
+        <form action="{{ route('Staff.destroy', $s) }}" method="POST" style="display: inline;">
           @csrf
           @method('DELETE')
           <button type="submit">Hapus</button>
