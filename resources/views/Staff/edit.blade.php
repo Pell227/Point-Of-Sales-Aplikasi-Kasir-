@@ -9,22 +9,22 @@
   <br>
   Nama:
   <br>
-  <textarea name="Name:" rows="8" required>{{ $staff->nama }}</textarea>
+  <textarea name="name" rows="8" required>{{ $staff->name }}</textarea>
   <br>
   <br>
   Posisi:
   <br>
-  <textarea name="Posisi:" rows="8" required>{{ $staff->posisi }}</textarea>
+  <textarea name="position" rows="8" required>{{ $staff->position }}</textarea>
   <br>
   <br>
   Email:
   <br>
-  <textarea name="Email:" rows="8" required>{{ $staff->email }}</textarea>
+  <textarea name="email" rows="8" required>{{ $staff->email }}</textarea>
   <br>
   <br>
   Nomor Telepon:
   <br>
-  <textarea name="Nomor Telepon:" rows="8" required>{{ $staff->nomor_telepon }}</textarea>
+  <textarea name="phone_number" rows="8" required>{{ $staff->phone_number }}</textarea>
   <br>
   <br>
   <button type="submit">Save</button>

@@ -27,12 +27,12 @@ class StaffController extends Controller
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'email' => 'required|email|unique:staff',
-            'phone_number' => 'required|integer',
+            'phone_number' => 'required|string|max:13',
         ]);
 
         Staff::create($request->only('NIP','name','position','email','phone_number'));
 
-        return redirect()->route('Staff.index')->with('Success', 'Staff created successfully.');
+        return redirect()->route('Staff.index')->with('success', 'Staff created successfully.');
     }
 
     public function show(Staff $staff)
@@ -52,7 +52,7 @@ class StaffController extends Controller
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'email' => 'required|email|unique:staff',
-            'phone_number' => 'required|integer',
+            'phone_number' => 'required|string|max:13',
         ]);
 
         $staff->update($request->only('NIP','name','position','email','phone_number'));

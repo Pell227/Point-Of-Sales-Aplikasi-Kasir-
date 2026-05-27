@@ -22,14 +22,14 @@
     <tr>
       <td style="text-align: center">{{ $loop->iteration}}</td>
       <td>
-        <a href="{{ route('Staff.show', $s) }}">
+        <a href="{{ route('Staff.show', $s) }}"> 
           {{ $s->NIP }}
         </a>
       </td>
-      <td> {{ $s->nama }}</td>
-      <td> {{ $s->posisi }}</td>
+      <td> {{ $s->name }}</td>
+      <td> {{ $s->position }}</td>
       <td> {{ $s->email }}</td>
-      <td> {{ $s->nomor_telepon }}</td>
+      <td> {{ $s->phone_number }}</td>
       <td style="text-align: center">
         <a href="{{ route('Staff.edit', $s) }}">Edit</a>
         <form action="{{ route('Staff.destroy', $s) }}" method="POST" style="display: inline;">

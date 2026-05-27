@@ -5,4 +5,4 @@ use App\Http\Controllers\StaffController;
 
 Route::get('/', [StaffController::class, 'index']);
 
-Route::resource('Staff', StaffController::class);
+Route::resource('staff', StaffController::class)->names('Staff');
