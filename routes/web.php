@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentMethodsController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('paymentMethods', PaymentMethodsController::class);
