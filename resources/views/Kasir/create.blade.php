@@ -11,7 +11,7 @@
     <div class="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
         <div class="mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Tambah Kasir Baru</h1>
-            <p class="text-sm text-gray-500">Daftyarkan akun kasir baru untuk menggunakan sistem POS</p>
+            <p class="text-sm text-gray-500">Daftarkan akun kasir baru untuk menggunakan sistem POS</p>
         </div>
 
         <form action="{{ route('auth.store') }}" method="POST" class="space-y-4">
