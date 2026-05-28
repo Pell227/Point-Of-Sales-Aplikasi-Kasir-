@@ -14,7 +14,7 @@
             <p class="text-sm text-gray-500">Daftarkan akun kasir baru untuk menggunakan sistem POS</p>
         </div>
 
-        <form action="{{ route('Auth.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('auth.store') }}" method="POST" class="space-y-4">
             @csrf
             
             <div>
