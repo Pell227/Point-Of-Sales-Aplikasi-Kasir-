@@ -3,63 +3,94 @@
 namespace App\Http\Controllers;
 
 use App\Models\account;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET /api/accounts  ← butuh token
+     * List semua akun beserta data staff-nya.
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+        $query = account::with('staff');
+
+        if ($request->filled('role')) {
+            $query->byRole($request->role);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        return response()->json([
+            'message' => 'Data akun berhasil diambil.',
+            'data'    => $query->orderBy('id')->get(),
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * GET /api/accounts/{id}
      */
-    public function create()
+    public function show(account $account): JsonResponse
     {
-        //
+        return response()->json([
+            'message' => 'Detail akun.',
+            'data'    => $account->load('staff'),
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * PUT /api/accounts/{id}
      */
-    public function store(Request $request)
+    public function update(Request $request, account $account): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'email'    => ['sometimes', 'required', 'email', Rule::unique('accounts', 'email')->ignore($account->id)],
+            'password' => ['sometimes', 'nullable', 'confirmed', Password::min(8)],
+            'role'     => ['sometimes', 'required', Rule::in(['admin', 'kasir'])],
+            'status'   => ['sometimes', Rule::in(['aktif', 'nonaktif'])],
+        ]);
+
+        if (empty($validated['password'])) {
+            unset($validated['password']);
+        }
+
+        $account->update($validated);
+
+        return response()->json([
+            'message' => 'Akun berhasil diperbarui.',
+            'data'    => $account->fresh()->load('staff'),
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * DELETE /api/accounts/{id}
      */
-    public function show(account $account)
+    public function destroy(account $account): JsonResponse
     {
-        //
+        $account->delete();
+
+        return response()->json([
+            'message' => 'Akun berhasil dihapus.',
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * PATCH /api/accounts/{id}/status
      */
-    public function edit(account $account)
+    public function toggleStatus(account $account): JsonResponse
     {
-        //
-    }
+        $account->status = $account->status === 'aktif' ? 'nonaktif' : 'aktif';
+        $account->save();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, account $account)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(account $account)
-    {
-        //
+        return response()->json([
+            'message' => 'Status akun berhasil diubah.',
+            'data'    => $account->load('staff'),
+        ]);
     }
 }
