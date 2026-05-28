@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\LoginWebController;
 use App\Http\Controllers\UserWebController;
+use App\Http\Controllers\CategoryController;
 
 Route::post('/products', function (Request $request) {
 
