@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // <-- Wajib ada untuk membaca session web
+use Illuminate\Support\Facades\Auth;
 
 class LoginWebController extends Controller
 {
