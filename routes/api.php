@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,3 +39,9 @@ Route::get('/register-via-browser', function (Request $request) {
         'data' => $user
     ]);
 });
+=======
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+
+Route::apiResource('products', ProductController::class);
+>>>>>>> e3d9a8f2a5c8738396036c4f04e59c7db3f8ab48
