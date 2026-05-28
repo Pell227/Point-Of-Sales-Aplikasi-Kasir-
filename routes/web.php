@@ -2,11 +2,10 @@
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
-Route::get('/products', function () {
-    $products = Product::all();
-    return view('products', compact('products'));
-});
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\PaymentMethodsController;
+use App\Http\Controllers\TransactionsController;
 
 Route::post('/products', function (Request $request) {
 
@@ -18,17 +17,17 @@ Route::post('/products', function (Request $request) {
 
     return redirect('/products');
 });
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StaffController;
-use App\Http\Controllers\PaymentMethodsController;
-use App\Http\Controllers\TransactionsController;
+
+Route::get('/products', function () {
+    $products = Product::all();
+    return view('products', compact('products'));
+});
 
 Route::get('/', [StaffController::class, 'index']);
 
 Route::get('/', function () {
     return redirect('/paymentMethods');
 });
-
 
 Route::get('/', [TransactionsController::class, 'index']);
 
