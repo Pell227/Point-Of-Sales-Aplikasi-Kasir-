@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Penting untuk mengaktifkan fitur login
+use Illuminate\Support\Facades\Auth; 
 
 class LoginWebController extends Controller
 {
-    // Menampilkan halaman login
-    public function showLogin()
+    
+public function showLogin()
     {
         return view('Auth.login'); 
     }
-
-    // Memproses data form login
+    
     public function login(Request $request)
     {
         $credentials = $request->validate([
