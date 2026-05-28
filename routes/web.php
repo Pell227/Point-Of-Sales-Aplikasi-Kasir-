@@ -16,4 +16,4 @@ Route::get('/login', [LoginWebController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginWebController::class, 'login'])->name('login.post');
 Route::post('/logout-web', [LoginWebController::class, 'logoutWeb'])->name('logout.web');
 
-Route::resource('auth', UserWebController::class);
+Route::resource('Auth', UserWebController::class);
