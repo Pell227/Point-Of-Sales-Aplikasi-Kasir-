@@ -23,10 +23,10 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'NIP' => 'required|unique:staff',
+            'NIP' => 'required|unique:staff,NIP',
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-            'email' => 'required|email|unique:staff',
+            'email' => 'required|email|unique:staff,email',
             'phone_number' => 'required|string|max:13',
         ]);
 
@@ -47,17 +47,19 @@ class StaffController extends Controller
 
     public function update(Request $request, Staff $staff)
     {
+        $staffId = $staff->getkey();
+
         $request->validate([
-            'NIP' => 'required|unique:staff',
+            'NIP' => 'required|unique:staff,NIP,' . $staffId,
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-            'email' => 'required|email|unique:staff',
+            'email' => 'required|email|unique:staff,email,' . $staffId,
             'phone_number' => 'required|string|max:13',
         ]);
 
         $staff->update($request->only('NIP','name','position','email','phone_number'));
 
-        return redirect()->route('Staff.index')->with('Success', 'Staff updated successfully');
+        return redirect()->route('Staff.index')->with('success', 'Staff updated successfully');
     }
 
     public function destroy(Staff $staff)
