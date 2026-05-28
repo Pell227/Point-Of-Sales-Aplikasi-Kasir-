@@ -1,5 +1,23 @@
 <?php
 
+use App\Models\Product;
+use Illuminate\Http\Request;
+
+Route::get('/products', function () {
+    $products = Product::all();
+    return view('products', compact('products'));
+});
+
+Route::post('/products', function (Request $request) {
+
+    Product::create([
+        'name' => $request->name,
+        'stock' => $request->stock,
+        'price' => $request->price,
+    ]);
+
+    return redirect('/products');
+});
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\PaymentMethodsController;
