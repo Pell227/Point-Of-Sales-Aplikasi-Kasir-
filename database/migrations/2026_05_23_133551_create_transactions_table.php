@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('id')->unique();
+            $table->string('Transactionid')->unique();
             $table->string('name');
             $table->integer('amount');
             $table->integer('tax');

@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\LoginWebController;
 use App\Http\Controllers\UserWebController;
+use App\Http\Controllers\PromotionController;
 
 Route::post('/products', function (Request $request) {
 
@@ -43,3 +44,4 @@ Route::middleware('auth')->group(function () {
 Route::resource('staff', StaffController::class)->names('Staff');
 Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
+Route::resource('promotions', PromotionController::class);
