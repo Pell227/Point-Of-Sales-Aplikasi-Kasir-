@@ -11,6 +11,7 @@ use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\TransactionListController;
 use App\Http\Controllers\LoginWebController;
 use App\Http\Controllers\UserWebController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/cek-menu', function () {
     return view('main');
@@ -62,6 +63,20 @@ Route::get('/products', function () {
     return view('products', compact('products'));
 });
 
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+});
+Route::resource('categories', CategoryController::class)->names([
+    'create' => 'category.create'
+]);
+Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
+
+Route::get('/', [StaffController::class, 'index']);
+
+Route::get('/', function () {
+    return redirect('/login');
+});
+
 Route::get('/transactions', function () {
     $transactions = transactions::all();
     return view('transactions', compact('transactions'));
@@ -85,4 +100,10 @@ Route::middleware('auth')->group(function () {
 Route::resource('staff', StaffController::class)->names('Staff');
 Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
+
+Route::resource('categories', CategoryController::class)->names([
+    'create' => 'category.create'
+]);
+
 Route::resource('transactionlists', TransactionListController::class);
+
