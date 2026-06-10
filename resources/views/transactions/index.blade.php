@@ -1,6 +1,6 @@
 <h1>Daftar data transaksi</h1>
 
-<a href="{{ route('transactions.create') }}">Buat Transaksi Baru</a>
+<a href="{{ route('transactions.create') }}">Buat transaksi baru</a>
 <br><br>
 
 @if ($transactions->isEmpty())
@@ -39,3 +39,4 @@
             @endforeach
         </tbody>
     </table>
+@endif
