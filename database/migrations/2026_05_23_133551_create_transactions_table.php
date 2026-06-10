@@ -10,15 +10,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transactions', function (Blueprint $table) {
+
+            $table->string('id')->primary();
+
             $table->id();
-            $table->timestamps();
 
             $table->string('Transactionid')->unique();
+
             $table->string('name');
             $table->integer('amount');
             $table->integer('tax');
             $table->enum('status', ['pending', 'paid', 'completed']);
             $table->date('date');
+
+            $table->timestamps();
         });
     }
 
