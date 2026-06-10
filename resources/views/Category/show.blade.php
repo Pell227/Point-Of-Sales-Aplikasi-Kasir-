@@ -1,4 +1,3 @@
-```php
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +17,7 @@
 
     <p><b>Description:</b> {{ $category->description }}</p>
 
-    <a href="{{ route('category.index') }}">Back</a>
+    <a href="{{ route('categories.index') }}">Back</a>
 
 </body>
 </html>
-```

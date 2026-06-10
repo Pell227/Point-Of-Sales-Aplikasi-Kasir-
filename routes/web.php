@@ -102,7 +102,7 @@ Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
 
 Route::resource('categories', CategoryController::class)->names([
-    'create' => 'category.create'
+    'create' => 'categories.create'
 ]);
 
 Route::resource('transactionlists', TransactionListController::class);

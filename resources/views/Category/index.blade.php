@@ -11,9 +11,9 @@
         <p>{{ session('success') }}</p>
     @endif
 
-    <a href="{{ route('category.create') }}">Add Category</a>
-
-    <table border="1" cellpadding="10">
+    <a href="{{ route('categories.create') }}">Add Category</a>
+    <br><br>
+    <table border="2" cellpadding="15">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -26,8 +26,8 @@
         @foreach($category as $item)
         <tr>
             <td>{{ $item->id }}</td>
-            <td>{{ $item->nameK }}</td>
-            <td>{{ $item->status }}</td>
+            <td>{{ ucwords($item->nameK) }}</td>
+            <td>{{ ucwords($item->status) }}</td>
             <td>{{ $item->date }}</td>
             <td>{{ $item->description }}</td>
             <td>
@@ -48,4 +48,3 @@
 
 </body>
 </html>
-```
