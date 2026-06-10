@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $table = 'Category';
+    protected $table = 'categories';
 
     protected $fillable = [
         'id',
@@ -15,4 +15,7 @@ class Category extends Model
         'date',
         'description',
     ];
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 }

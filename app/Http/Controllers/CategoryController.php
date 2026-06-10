@@ -29,12 +29,15 @@ class CategoryController extends Controller
             'description' => 'required|string|max:404',
         ]);
 
-        Category::create(
-            $request->only('id', 'nameK', 'status', 'date','description')
-        );
+        Category::create([
+            'id'          => $request->id,
+            'nameK'        => $request->nameK, 
+            'status'      => $request->status,
+            'date'        => $request->date,
+            'description' => $request->description,
+        ]);
 
-        return redirect()->route('category.index')
-                         ->with('success', 'Category created successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     public function show(Category $category)
@@ -61,7 +64,7 @@ class CategoryController extends Controller
             $request->only('id', 'nameK', 'status', 'date', 'description')
         );
 
-        return redirect()->route('category.index')
+        return redirect()->route('categories.index')
                          ->with('success', 'Category updated successfully.');
     }
 
@@ -69,7 +72,7 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('category.index')
+        return redirect()->route('categories.index')
                          ->with('success', 'Category deleted successfully.');
     }
 }

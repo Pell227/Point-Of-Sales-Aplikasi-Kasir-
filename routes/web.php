@@ -27,6 +27,14 @@ Route::get('/products', function () {
 });
 
 
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+});
+Route::resource('categories', CategoryController::class)->names([
+    'create' => 'category.create'
+]);
+Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
+
 Route::get('/', [StaffController::class, 'index']);
 
 Route::get('/', function () {
@@ -44,3 +52,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('staff', StaffController::class)->names('Staff');
 Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
+Route::resource('categories', CategoryController::class)->names([
+    'create' => 'category.create'
+]);
+
