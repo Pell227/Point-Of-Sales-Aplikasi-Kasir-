@@ -11,14 +11,15 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
 
-            $table->string('id')->unique();
+            $table->string('Transactionid')->unique();
             $table->string('name');
             $table->integer('amount');
             $table->integer('tax');
             $table->enum('status', ['pending', 'paid', 'completed']);
             $table->date('date');
+
+            $table->timestamps();
         });
     }
 
