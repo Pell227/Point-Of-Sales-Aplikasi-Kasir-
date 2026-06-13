@@ -31,7 +31,9 @@ Route::get('/', function () {
 
 
 Route::get('/', [TransactionsController::class, 'index']);
+Route::get('/products-view', [ProductViewController::class, 'index']);
 
 Route::resource('staff', StaffController::class)->names('Staff');
 Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
+Route::resource('products', ProductController::class);

@@ -11,4 +11,9 @@ class Product extends Model
         'stock',
         'price'
     ];
+    
+    public function supplier()
+{
+    return $this->belongsTo(Supplier::class);
+}
 }
