@@ -15,6 +15,7 @@ return new class extends Migration
 
             $table->id();
 
+            $table->string('transaction_code')->unique();
             $table->string('Transactionid')->unique();
 
             $table->string('name');
