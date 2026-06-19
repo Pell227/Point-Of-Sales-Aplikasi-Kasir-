@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Point Of Sales</title>
-
+    <title>Point Of Sales - @yield('title', 'Dashboard')</title>
   </head>
   <body class="bg-gray-100 font-sans antialiased">
 
@@ -19,36 +18,32 @@
           </div>
 
           <nav class="space-y-2">
-            <a href="{{ url('/products') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+            <a href="{{ url('/products') }}"
+               class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
+                      {{ request()->is('products*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
               <span>📦</span> Produk
             </a>
-            <a href="{{ route('transactions.index') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+            <a href="{{ route('transactions.index') }}"
+               class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
+                      {{ request()->routeIs('transactions.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
               <span>🧾</span> Transaksi
             </a>
-            <a href="{{ route('Staff.index') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+            <a href="{{ route('Staff.index') }}"
+               class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
+                      {{ request()->routeIs('Staff.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
               <span>👥</span> Staff
             </a>
-            <a href="{{ route('paymentMethods.index') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+            <a href="{{ route('paymentMethods.index') }}"
+               class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
+                      {{ request()->routeIs('paymentMethods.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
               <span>💳</span> Metode Pembayaran
             </a>
           </nav>
         </div>
-
-        <div class="p-4 border-t border-gray-100">
-          <form action="{{ route('logout.web') }}" method="POST">
-            @csrf
-            <button type="submit" class="w-full text-center px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
-              Keluar
-            </button>
-          </form>
-        </div>
       </aside>
 
       <main class="flex-1 p-8">
-        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm min-h-[80px]">
-          <h1 class="text-xl font-semibold text-gray-800">Konten Utama</h1>
-          <p class="text-sm text-gray-500 mt-1">Isi data tabel produk atau transaksi Anda akan muncul di area ini.</p>
-        </div>
+        @yield('content')
       </main>
 
     </div>
