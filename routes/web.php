@@ -11,11 +11,15 @@ use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\TransactionListController;
 use App\Http\Controllers\LoginWebController;
 use App\Http\Controllers\UserWebController;
+<<<<<<< HEAD
+use App\Http\Controllers\PromotionController;
+=======
 use App\Http\Controllers\CategoryController;
 
 Route::get('/cek-menu', function () {
     return view('main');
 });
+>>>>>>> 93cd7b70d105fb69c5d7e58d46549613df751736
 
 Route::post('/products', function (Request $request) {
 
@@ -100,6 +104,9 @@ Route::middleware('auth')->group(function () {
 Route::resource('staff', StaffController::class)->names('Staff');
 Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
+<<<<<<< HEAD
+Route::resource('promotions', PromotionController::class);
+=======
 
 Route::resource('categories', CategoryController::class)->names([
     'create' => 'category.create'
@@ -107,3 +114,4 @@ Route::resource('categories', CategoryController::class)->names([
 
 Route::resource('transactionlists', TransactionListController::class);
 
+>>>>>>> 93cd7b70d105fb69c5d7e58d46549613df751736
