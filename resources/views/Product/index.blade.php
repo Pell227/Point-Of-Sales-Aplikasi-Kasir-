@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'Product')
+
+@section('content')
+
 <h1>Data Product</h1>
 
 <a href="{{ route('products.create') }}">
@@ -26,3 +32,4 @@
     </tr>
     @endforeach
 </table>
+@endsection

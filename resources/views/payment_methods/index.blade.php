@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'payment_methods')
+
+@section('content')
+
 <h1>Daftar Metode Pembayaran</h1>
 
 @if(session('success'))
@@ -63,3 +69,5 @@
     @endforeach
 
 </table>
+
+@endsection
