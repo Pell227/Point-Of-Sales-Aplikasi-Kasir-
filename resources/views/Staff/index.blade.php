@@ -1,5 +1,9 @@
 <h1> Daftar Data Staff </h1>
 
+@extends('main')
+
+@section('title', 'Staff')
+
 <a href="{{ route('Staff.create') }}">Tambah Staff Baru</a>
 <br><br>
 
