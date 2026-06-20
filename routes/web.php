@@ -5,6 +5,8 @@ use App\Models\Transaction;
 use App\Models\TransactionList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductViewController; 
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\TransactionsController;
@@ -16,17 +18,6 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/cek-menu', function () {
     return view('main');
-});
-
-Route::post('/products', function (Request $request) {
-
-    Product::create([
-        'name' => $request->name,
-        'stock' => $request->stock,
-        'price' => $request->price,
-    ]);
-
-    return redirect('/products');
 });
 
 Route::post('/transactions', function (Request $request) {
@@ -57,11 +48,6 @@ Route::post('/transactionlists', function (Request $request) {
     ]);
 
     return redirect('/transactionlists');
-});
-
-Route::get('/products', function () {
-    $products = Product::all();
-    return view('products', compact('products'));
 });
 
 Route::get('/categories', [CategoryController::class, 'index']);
