@@ -15,7 +15,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CategoryController;
 
 Route::get('/cek-menu', function () {
-    return view('main');
+    return view('layouts.main');
 });
 
 Route::post('/products', function (Request $request) {

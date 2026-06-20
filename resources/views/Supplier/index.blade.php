@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'Supplier')
+
+@section('content')
+
 <h1>Data Supplier</h1>
 
 <a href="{{ route('suppliers.create') }}">
@@ -26,3 +32,4 @@
     </tr>
     @endforeach
 </table>
+@endofsection

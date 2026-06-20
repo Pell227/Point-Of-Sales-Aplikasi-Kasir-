@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'transactions')
+
+@section('content')
+
 <h1>Daftar data transaksi</h1>
 
 <a href="{{ route('transactions.create') }}">Buat transaksi baru</a>
@@ -40,3 +46,4 @@
         </tbody>
     </table>
 @endif
+@endsection

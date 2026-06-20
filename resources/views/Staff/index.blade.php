@@ -1,8 +1,10 @@
-<h1> Daftar Data Staff </h1>
-
-@extends('main')
+@extends('layouts.main')
 
 @section('title', 'Staff')
+
+@section('content')
+
+<h1> Daftar Data Staff </h1>
 
 <a href="{{ route('Staff.create') }}">Tambah Staff Baru</a>
 <br><br>
@@ -47,3 +49,5 @@
 </tbody>
 </table>
 @endif
+
+@endsection
