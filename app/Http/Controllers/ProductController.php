@@ -9,7 +9,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json(Product::all());
+        $products = Product::all();
+
+        return view('Product.index', compact('products'));
     }
 
     public function store(Request $request)
@@ -56,5 +58,15 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'Product berhasil dihapus'
         ]);
+    }
+
+    public function create()
+    {
+        return view('Product.create');
+    }
+
+    public function edit(Product $product)
+    {
+        return view('Product.edit', compact('product'));
     }
 }
