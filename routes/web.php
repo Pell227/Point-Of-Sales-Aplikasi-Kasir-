@@ -93,7 +93,7 @@ Route::resource('products', ProductController::class);
 Route::resource('promotions', PromotionController::class);
 
 Route::resource('categories', CategoryController::class)->names([
-    'create' => 'category.create'
+    'create' => 'categories.create'
 ]);
 
 Route::resource('transactionlists', TransactionListController::class);
