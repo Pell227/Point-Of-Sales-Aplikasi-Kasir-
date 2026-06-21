@@ -7,8 +7,8 @@ use App\Models\TransactionList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductViewController; 
+use App\Http\Controllers\ProductViewController;
+use App\Http\Controllers\SupplierViewController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\TransactionsController;
@@ -78,7 +78,6 @@ Route::get('/transactionlists', function () {
 });
 
 Route::get('/', [TransactionsController::class, 'index']);
-Route::get('/products-view', [ProductViewController::class, 'index']);
 Route::get('/staff', [StaffController::class, 'index']);
 
 Route::get('/', [LoginWebController::class, 'showLogin'])->name('login');
@@ -93,7 +92,8 @@ Route::resource('staff', StaffController::class)->names('Staff');
 Route::resource('Reports', ReportsController::class)->parameters(['Reports' => 'reports']);
 Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
-Route::resource('products', ProductController::class);
+Route::resource('products', ProductViewController::class);
+Route::resource('suppliers', SupplierViewController::class);
 Route::resource('promotions', PromotionController::class);
 
 Route::resource('categories', CategoryController::class)->names([
@@ -101,4 +101,3 @@ Route::resource('categories', CategoryController::class)->names([
 ]);
 
 Route::resource('transactionlists', TransactionListController::class);
-

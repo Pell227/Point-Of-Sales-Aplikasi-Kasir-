@@ -43,5 +43,5 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 
-Route::apiResource('products', ProductController::class);
-Route::apiResource('suppliers', SupplierController::class);
+Route::apiResource('products', ProductController::class)->names('api.products');
+Route::apiResource('suppliers', SupplierController::class)->names('api.suppliers');
