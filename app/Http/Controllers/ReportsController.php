@@ -10,7 +10,7 @@ class ReportsController extends Controller
     
     public function index()
     {
-        $reports = Reports:all();
+        $reports = Reports::all();
 
         return view('Reports.index', compact('reports'));
     }
@@ -23,39 +23,45 @@ class ReportsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255'
-        ])
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        Reports::create($request->only('title','description','start_date','end_date'));
+
+        return redirect()->route('Reports.index')->with('success', 'Reports created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Reports $reports)
     {
-        //
+        return view('Reports.show', compact('reports'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Reports $reports)
     {
-        //
+        return view('Reports.edit', compact('reports'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Reports $reports)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        $reports->update($request->only('title','description','start_date','end_date'));
+
+        return redirect()->route('Reports.index')->with('success', 'Reports updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Reports $reports)
     {
-        //
+        $reports->delete();
+
+        return redirect()->route('Reports.index')->with('Success', 'Reports deleted successfully');
     }
 }

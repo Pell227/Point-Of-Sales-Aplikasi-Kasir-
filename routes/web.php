@@ -3,8 +3,10 @@
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionList;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductViewController; 
 use App\Http\Controllers\StaffController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\LoginWebController;
 use App\Http\Controllers\UserWebController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReportsController;
 
 Route::get('/cek-menu', function () {
     return view('layouts.main');
@@ -87,6 +90,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('staff', StaffController::class)->names('Staff');
+Route::resource('Reports', ReportsController::class)->parameters(['Reports' => 'reports']);
 Route::resource('paymentMethods', PaymentMethodsController::class);
 Route::resource('transactions', TransactionsController::class);
 Route::resource('products', ProductController::class);
