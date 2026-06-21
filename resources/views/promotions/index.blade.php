@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'promotions')
+
+@section('content')
+
 <h1>Daftar Promo</h1>
 
 <a href="{{ route('promotions.create') }}">
@@ -71,3 +77,4 @@
     @endforeach
 
 </table>
+@endsection
