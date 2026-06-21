@@ -50,6 +50,12 @@
         <span>Promo</span>
         </a>
 
+        <a href="{{ route('Reports.index') }}"
+           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
+          {{ request()->routeIs('Reports.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+        <span>📝 Report</span>
+        </a>
+        
           </nav>
   </div>
 </aside>
