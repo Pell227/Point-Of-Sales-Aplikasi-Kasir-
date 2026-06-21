@@ -9,6 +9,13 @@
 
     <input type="number" name="price" placeholder="Harga">
 
+    <select name="supplier_id">
+        <option value="">-- Pilih Supplier (opsional) --</option>
+        @foreach($suppliers as $supplier)
+            <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+        @endforeach
+    </select>
+
     <button type="submit">
         Simpan
     </button>

@@ -30,14 +30,14 @@
         <img src="{{ asset('Assets/Icons/staff.png') }}" alt="Staff" class="w-5 h-5">
         <span>Staff</span> 
             </a>
-        @verbatim
-        <a href="{{ route('Supplier.index') }}"
+
+        <a href="{{ route('suppliers.index') }}"
            class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
-           {{ request()->routeIs('Supplier.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+           {{ request()->routeIs('suppliers.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
         <img src="{{ asset('Assets/Icons/Supplier.png') }}" alt="Supplier" class="w-5 h-5">
         <span>Supplier</span>
         </a>
-        @endverbatim
+
         
         <a href="{{ route('paymentMethods.index') }}"
           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
