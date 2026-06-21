@@ -13,19 +13,22 @@
         <a href="{{ url('/products') }}"
           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
           {{ request()->is('products*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-        <span>📦</span> Produk
+        <img src="{{ asset('Assets/Icons/Product.png') }}" alt="Product" class="w-5 h-5">
+        <span>Produk</span>
             </a>
         
         <a href="{{ route('transactions.index') }}"
           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
           {{ request()->routeIs('transactions.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-        <span>🧾</span> Transaksi
+        <img src="{{ asset('Assets/Icons/Tl.png') }}" alt="Transaksi" class="w-5 h-5">
+        <span>Transaksi</span> 
             </a>
         
         <a href="{{ route('Staff.index') }}"
           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
           {{ request()->routeIs('Staff.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-        <span>👥</span> Staff
+        <img src="{{ asset('Assets/Icons/staff.png') }}" alt="Staff" class="w-5 h-5">
+        <span>Staff</span> 
             </a>
 
         <a href="{{ route('suppliers.index') }}"
@@ -39,23 +42,24 @@
         <a href="{{ route('paymentMethods.index') }}"
           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
           {{ request()->routeIs('paymentMethods.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-        <img src="{{ asset('Assets/Icons/card.jpg') }}" alt="Metode Pembayaran" class="w-5 h-5">
+        <img src="{{ asset('Assets/Icons/Card.png') }}" alt="Metode Pembayaran" class="w-5 h-5">
         <span>Metode Pembayaran</span>
         </a>
         
         <a href="{{ route('promotions.index') }}"
           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
           {{ request()->routeIs('promotions.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-        <img src="{{ asset('Assets/Icons/promos') }}" alt="Promos" class="w-5 h-5">
+        <img src="{{ asset('Assets/Icons/Promo.png') }}" alt="Promos" class="w-5 h-5">
         <span>Promo</span>
         </a>
 
         <a href="{{ route('Reports.index') }}"
            class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
           {{ request()->routeIs('Reports.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-        <span>📝 Report</span>
+        <img src="{{ asset('Assets/Icons/Reports.png') }}" alt="Reports" class="w-5 h-5">
+        <span>Report</span>
         </a>
-        
+
           </nav>
   </div>
 </aside>
