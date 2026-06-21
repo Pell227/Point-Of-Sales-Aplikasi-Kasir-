@@ -11,9 +11,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
 
-<<<<<<< HEAD
             $table->string('transaction_code')->unique();
-=======
             $table->string('id')->primary();
 
             $table->id();
@@ -21,7 +19,6 @@ return new class extends Migration
             $table->string('transaction_code')->unique();
             $table->string('Transactionid')->unique();
 
->>>>>>> 320c47c99bfbc16889c9f11a1c1357ae3eede3a5
             $table->string('name');
             $table->integer('amount');
             $table->integer('tax');
