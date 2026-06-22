@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('amount');
             $table->integer('tax');
-            $table->enum('status', ['pending', 'paid', 'free', 'completed']);
+            $table->enum('status', ['pending', 'Paid', 'completed', 'canceled']);
             $table->date('date');
 
             $table->timestamps();
