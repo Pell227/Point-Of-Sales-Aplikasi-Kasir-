@@ -56,7 +56,7 @@
             </a>
             <span class="text-gray-400">|</span>
             <a href="{{ route('register') }}" class="text-blue-600 hover:underline font-medium">
-                Belum punya akun? <span class="font-bold">Sign up</span>
+                <span class="font-bold"> Sign up </span>
             </a>
         </div>
     </div>
