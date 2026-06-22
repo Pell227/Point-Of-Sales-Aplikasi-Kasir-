@@ -14,15 +14,38 @@ use App\Http\Controllers\PaymentMethodsController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\TransactionListController;
 use App\Http\Controllers\LoginWebController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\UserWebController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReportsController;
 
+
+
+
+Route::get('/', [LoginWebController::class, 'showLogin'])->name('login');
+Route::post('/login', [LoginWebController::class, 'login'])->name('login.post');
+Route::post('/logout-web', [LoginWebController::class, 'logoutWeb'])->name('logout.web');
+Route::get('/register', [LoginWebController::class, 'showRegister'])->name('register');
+Route::post('/register', [LoginWebController::class, 'register'])->name('register.post');
+Route::get('/change-password', [ChangePasswordController::class, 'showChangePassword'])->name('password.change');
+Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::resource('auth', UserWebController::class);
+});
+
+// Fitur Cek Menu / Layouts
 Route::get('/cek-menu', function () {
     return view('layouts.main');
 });
 
+
+Route::get('/cek-menu', function () {
+    return view('layouts.main');
+});
 Route::post('/transactions', function (Request $request) {
 
     transactions::create([
@@ -36,7 +59,6 @@ Route::post('/transactions', function (Request $request) {
 
     return redirect('/transactions');
 });
-
 Route::post('/transactionlists', function (Request $request) {
 
     TransactionList::create([
@@ -52,7 +74,6 @@ Route::post('/transactionlists', function (Request $request) {
 
     return redirect('/transactionlists');
 });
-
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::middleware(['auth'])->group(function () {
 });
@@ -95,9 +116,9 @@ Route::resource('transactions', TransactionsController::class);
 Route::resource('products', ProductViewController::class);
 Route::resource('suppliers', SupplierViewController::class);
 Route::resource('promotions', PromotionController::class);
-
 Route::resource('categories', CategoryController::class)->names([
     'create' => 'categories.create'
 ]);
-
 Route::resource('transactionlists', TransactionListController::class);
+
+Route::get('/products-view', [ProductViewController::class, 'index']);
