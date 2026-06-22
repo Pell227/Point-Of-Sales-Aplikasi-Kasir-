@@ -32,8 +32,13 @@ Route::get('/main', function () {
     });
 
 Route::middleware('auth')->group(function () {
-    
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/dashboard', function () {
+        return view('layouts.main'); 
+    })->name('dashboard');
+    Route::resource('auth', UserWebController::class)->names('auth');
+
+
     Route::resource('staff',StaffController::class)->names('Staff');
     Route::resource('products',ProductViewController::class);
     Route::resource('suppliers',SupplierViewController::class);
