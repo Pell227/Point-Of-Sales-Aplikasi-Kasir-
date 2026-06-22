@@ -1,73 +1,107 @@
 @extends('layouts.main')
 
-@section('title', 'payment_methods')
+@section('title', 'Metode Pembayaran')
 
 @section('content')
 
-<h1>Daftar Metode Pembayaran</h1>
+<div class="bg-white rounded-xl shadow p-6">
 
-@if(session('success'))
+    <div class="flex justify-between items-center mb-6">
 
-    <p style="color:green">
-        {{ session('success') }}
-    </p>
+        <div>
+            <h1 class="text-3xl font-bold">
+                Daftar Metode Pembayaran
+            </h1>
 
-@endif
+            <p class="text-gray-500">
+                Kelola metode pembayaran toko
+            </p>
+        </div>
 
-<a href="{{ route('paymentMethods.create') }}">
-    Tambah Metode Pembayaran
-</a>
+        <a href="{{ route('paymentMethods.create') }}"
+           class="bg-blue-600 text-white px-4 py-2 rounded-lg">
 
-<br><br>
+            + Tambah Metode
 
-<table border="1" cellpadding="10">
+        </a>
 
-    <tr>
+    </div>
 
-        <th>ID</th>
-        <th>Metode Pembayaran</th>
-        <th>Jenis Pembayaran</th>
-        <th>Tipe</th>
-        <th>Provider</th>
-        <th>Aksi</th>
+    <table class="w-full">
 
-    </tr>
+        <thead class="bg-gray-100">
 
-    @foreach($paymentMethods as $item)
+            <tr>
 
-    <tr>
+                <th class="p-3 text-left">ID</th>
+                <th class="p-3 text-left">Metode</th>
+                <th class="p-3 text-left">Jenis</th>
+                <th class="p-3 text-left">Tipe</th>
+                <th class="p-3 text-left">Provider</th>
+                <th class="p-3 text-left">Aksi</th>
 
-        <td>{{ $item->id }}</td>
-        <td>{{ $item->payment_method }}</td>
-        <td>{{ $item->payment_type }}</td>
-        <td>{{ $item->payment_category }}</td>
-        <td>{{ $item->provider }}</td>
+            </tr>
 
-        <td>
+        </thead>
 
-            <a href="{{ route('paymentMethods.edit', $item->id) }}">
-                Edit
-            </a>
+        <tbody>
 
-            <form action="{{ route('paymentMethods.destroy', $item->id) }}"
-                  method="POST"
-                  style="display:inline">
+            @foreach($paymentMethods as $item)
 
-                @csrf
-                @method('DELETE')
+            <tr class="border-b">
 
-                <button type="submit">
-                    Hapus
-                </button>
+                <td class="p-3">{{ $item->id }}</td>
 
-            </form>
+                <td class="p-3">
+                    {{ $item->payment_method }}
+                </td>
 
-        </td>
+                <td class="p-3">
+                    {{ $item->payment_type }}
+                </td>
 
-    </tr>
+                <td class="p-3">
+                    {{ $item->payment_category }}
+                </td>
 
-    @endforeach
+                <td class="p-3">
+                    {{ $item->provider }}
+                </td>
 
-</table>
+                <td class="p-3">
+
+                    <a href="{{ route('paymentMethods.edit', $item->id) }}"
+                       class="text-yellow-600">
+
+                        Edit
+
+                    </a>
+
+                    |
+
+                    <form action="{{ route('paymentMethods.destroy',$item->id) }}"
+                          method="POST"
+                          class="inline">
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button class="text-red-600">
+                            Hapus
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            @endforeach
+
+        </tbody>
+
+    </table>
+
+</div>
 
 @endsection

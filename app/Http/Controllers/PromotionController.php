@@ -21,15 +21,14 @@ class PromotionController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'promo_name' => 'required',
-            'discount_type' => 'required',
-            'discount_value' => 'required',
-            'minimum_purchase' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-        ]);
-
+    $request->validate([
+    'promo_name' => 'required',
+    'discount_type' => 'required',
+    'discount_value' => 'required',
+    'min_purchase' => 'required',
+    'start_date' => 'required',
+    'end_date' => 'required',
+]);
         Promotion::create($request->all());
 
         return redirect()->route('promotions.index')
@@ -52,7 +51,7 @@ class PromotionController extends Controller
             'promo_name' => $request->promo_name,
             'discount_type' => $request->discount_type,
             'discount_value' => $request->discount_value,
-            'minimum_purchase' => $request->minimum_purchase,
+            'min_purchase' => $request->min_purchase,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'is_active' => $request->is_active,
