@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class transactions extends Model
 {
+    public function transactionLists()
+    {
+        return $this->hasMany(transactionList::class, 'Transactionid', 'Transactionid');
+    }
+
     protected $table = 'transactions';
 
     protected $fillable = [
-        'id',
-        'name',
+        'Transactionid',
+        'nameTransaction',
         'amount',
         'tax',
-        'status',
-        'date',
+        'statustrans',
+        'datetrans',
     ];
 }
