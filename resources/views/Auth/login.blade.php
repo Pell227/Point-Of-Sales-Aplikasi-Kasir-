@@ -20,6 +20,12 @@
             </div>
         @endif
 
+        @if(session('success'))
+            <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-sm">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
             @csrf
             
@@ -43,6 +49,16 @@
                 Masuk ke Sistem
             </button>
         </form>
+
+        <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-100 text-xs">
+            <a href="{{ route('password.change') }}" class="text-blue-600 hover:underline font-medium">
+                Ubah Password?
+            </a>
+            <span class="text-gray-400">|</span>
+            <a href="{{ route('register') }}" class="text-blue-600 hover:underline font-medium">
+                <span class="font-bold"> Sign up </span>
+            </a>
+        </div>
     </div>
 
 </body>
