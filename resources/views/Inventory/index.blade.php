@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'report')
+
+@section('content')
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,3 +160,4 @@ document.querySelectorAll('.btn-hapus-saktai').forEach(button => {
 </script>
 </body>
 </html>
+@endsection

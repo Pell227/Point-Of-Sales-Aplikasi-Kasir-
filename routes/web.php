@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginWebController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\UserWebController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductViewController;
 use App\Http\Controllers\SupplierViewController;
 use App\Http\Controllers\CategoryController;
@@ -25,6 +27,9 @@ Route::get('/register', [LoginWebController::class, 'showRegister'])->name('regi
 Route::post('/register', [LoginWebController::class, 'register'])->name('register.post');
 Route::get('/change-password', [ChangePasswordController::class, 'showChangePassword'])->name('password.change');
 Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+Route::get('/main', function () {
+    return view('layouts.main');
+    });
 
 Route::middleware('auth')->group(function () {
 

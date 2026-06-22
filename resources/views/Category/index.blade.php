@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'category')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -333,3 +339,4 @@ function filterTable() {
 
 </body>
 </html>
+@endsection
