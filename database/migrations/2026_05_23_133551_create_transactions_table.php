@@ -12,12 +12,12 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
 
-            $table->string('Transactionid')->unique(); #harus unik tidak boleh sama
-            $table->string('name');
+            $table->string('Transactionid')->unique(); 
+            $table->string('nameTransaction');
             $table->integer('amount');
             $table->integer('tax');
-            $table->enum('status', ['pending', 'Paid', 'completed', 'canceled']);
-            $table->date('date');
+            $table->enum('statustrans', ['pending', 'Paid', 'completed', 'canceled']);
+            $table->date('datetrans');
 
             $table->timestamps();
         });
