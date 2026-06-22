@@ -1,80 +1,132 @@
 @extends('layouts.main')
 
-@section('title', 'promotions')
+@section('title', 'Promo')
 
 @section('content')
 
-<h1>Daftar Promo</h1>
+<div class="bg-white rounded-xl shadow p-6">
 
-<a href="{{ route('promotions.create') }}">
-    Tambah Promo
-</a>
+    <div class="flex justify-between items-center mb-6">
 
-<br><br>
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">
+                Daftar Promo
+            </h1>
 
-<table border="1" cellpadding="10">
+            <p class="text-gray-500 text-sm">
+                Kelola promo dan diskon toko
+            </p>
+        </div>
 
-    <tr>
-        <th>ID</th>
-        <th>Nama Promo</th>
-        <th>Tipe Diskon</th>
-        <th>Nilai Diskon</th>
-        <th>Minimal Belanja</th>
-        <th>Tanggal Mulai</th>
-        <th>Tanggal Selesai</th>
-        <th>Status</th>
-        <th>Aksi</th>
-    </tr>
+        <a href="{{ route('promotions.create') }}"
+           class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+            + Tambah Promo
+        </a>
 
-    @foreach($promotions as $promo)
+    </div>
 
-    <tr>
+    <table class="w-full border-collapse">
 
-        <td>{{ $promo->id }}</td>
-        <td>{{ $promo->promo_name }}</td>
-        <td>{{ $promo->discount_type }}</td>
-        <td>{{ $promo->discount_value }}</td>
-        <td>{{ $promo->minimum_purchase }}</td>
+        <thead>
 
-        <td>{{ $promo->start_date }}</td>
-        <td>{{ $promo->end_date }}</td>
+            <tr class="bg-gray-100">
 
-        <td>
-            {{ $promo->is_active ? 'Aktif' : 'Tidak Aktif' }}
-        </td>
+                <th class="p-3 text-left">ID</th>
+                <th class="p-3 text-left">Nama Promo</th>
+                <th class="p-3 text-left">Tipe</th>
+                <th class="p-3 text-left">Nilai</th>
+                <th class="p-3 text-left">Minimal Belanja</th>
+                <th class="p-3 text-left">Mulai</th>
+                <th class="p-3 text-left">Selesai</th>
+                <th class="p-3 text-left">Status</th>
+                <th class="p-3 text-center">Aksi</th>
 
-        <td>
+            </tr>
 
-            <a href="{{ route('promotions.show', $promo->id) }}">
-                Detail
-            </a>
+        </thead>
 
-            |
+        <tbody>
 
-            <a href="{{ route('promotions.edit', $promo->id) }}">
-                Edit
-            </a>
+            @forelse($promotions as $promo)
 
-            |
+            <tr class="border-b">
 
-            <form action="{{ route('promotions.destroy', $promo->id) }}"
-                  method="POST"
-                  style="display:inline">
+                <td class="p-3">{{ $promo->id }}</td>
+                <td class="p-3">{{ $promo->promo_name }}</td>
+                <td class="p-3">{{ $promo->discount_type }}</td>
+                <td class="p-3">{{ $promo->discount_value }}</td>
+                <td class="p-3">{{ $promo->minimum_purchase }}</td>
+                <td class="p-3">{{ $promo->start_date }}</td>
+                <td class="p-3">{{ $promo->end_date }}</td>
 
-                @csrf
-                @method('DELETE')
+                <td class="p-3">
 
-                <button type="submit">
-                    Hapus
-                </button>
+                    @if($promo->is_active)
 
-            </form>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                            Aktif
+                        </span>
 
-        </td>
+                    @else
 
-    </tr>
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+                            Tidak Aktif
+                        </span>
 
-    @endforeach
+                    @endif
 
-</table>
+                </td>
+
+                <td class="p-3 text-center">
+
+                    <a href="{{ route('promotions.show', $promo->id) }}"
+                       class="text-blue-600 hover:underline">
+                        Detail
+                    </a>
+
+                    |
+
+                    <a href="{{ route('promotions.edit', $promo->id) }}"
+                       class="text-yellow-600 hover:underline">
+                        Edit
+                    </a>
+
+                    |
+
+                    <form action="{{ route('promotions.destroy', $promo->id) }}"
+                          method="POST"
+                          class="inline">
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit"
+                                class="text-red-600 hover:underline">
+                            Hapus
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            @empty
+
+            <tr>
+
+                <td colspan="9" class="p-8 text-center text-gray-500">
+                    Belum ada promo
+                </td>
+
+            </tr>
+
+            @endforelse
+
+        </tbody>
+
+    </table>
+
+</div>
+
 @endsection
