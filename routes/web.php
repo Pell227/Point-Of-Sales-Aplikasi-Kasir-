@@ -19,7 +19,7 @@ use App\Http\Controllers\UserWebController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReportsController;
-
+use App\Http\Controllers\InventoryController;
 
 
 
@@ -81,6 +81,8 @@ Route::resource('categories', CategoryController::class)->names([
     'create' => 'category.create'
 ]);
 Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
+
+Route::resource('inventory', InventoryController::class);
 
 Route::get('/', [StaffController::class, 'index']);
 
