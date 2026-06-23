@@ -9,6 +9,7 @@
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg mx-4">
         <div class="mb-6 text-center">
+            <img src="{{ asset('Assets/Icons/POS.png') }}" alt="Logo POS" class="mx-auto h-20 w-20 object-contain mb-2">
             <h1 class="text-2xl font-bold text-gray-800">Daftar Akun Baru</h1>
         </div>
 

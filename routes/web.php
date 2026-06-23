@@ -19,6 +19,7 @@ use App\Http\Controllers\TransactionListController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\LogoutController;
 
 Route::get('/', [LoginWebController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginWebController::class, 'login'])->name('login.post');
@@ -64,4 +65,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/checkout', [CartController::class, 'checkout'])
         ->name('checkout');
+
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
