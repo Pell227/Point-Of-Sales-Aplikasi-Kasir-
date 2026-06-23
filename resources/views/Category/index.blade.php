@@ -176,39 +176,7 @@
                             <h1 class="page-title">Daftar Kategori</h1>
                             <p class="page-subtitle">Kelola semua kategori produk</p>
                         </div>
-                    </div>
-                    <div class="toolbar-wrapper" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: flex-end;">
-                            <button type="button" class="btn-logout" id="btnSaktiLogout">
-                                <i class="ti ti-logout"></i> Logout
-                            </button>
-                        </div>
-                    </div>
-
-                    <script>
-                    document.getElementById('btnSaktiLogout').addEventListener('click', function(e) {
-                        e.preventDefault();
-                        
-                        if (confirm('Apakah Anda yakin ingin logout?')) {
-                            fetch('/logout-web', {
-                                method: 'POST',
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json'
-                                }
-                            })
-                            .then(response => {
-                            // paksa logout
-                                window.location.href = '/';
-                            })
-                            .catch(error => {
-                                // Jika koneksi putus, tetap paksa tendang ke halaman depan
-                                window.location.href = '/';
-                            });
-                        }
-                    });
-                    </script>
+                    </div
 
                     {{-- TOOLBAR --}}
                     <div class="toolbar">
