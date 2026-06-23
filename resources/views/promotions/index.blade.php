@@ -55,7 +55,7 @@
                 <td class="p-3">{{ $promo->promo_name }}</td>
                 <td class="p-3">{{ $promo->discount_type }}</td>
                 <td class="p-3">{{ $promo->discount_value }}</td>
-                <td class="p-3">{{ $promo->minimum_purchase }}</td>
+                <td class="p-3">{{ $promo->min_purchase }}</td>
                 <td class="p-3">{{ $promo->start_date }}</td>
                 <td class="p-3">{{ $promo->end_date }}</td>
 

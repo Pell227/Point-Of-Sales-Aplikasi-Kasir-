@@ -43,7 +43,7 @@
     </div>
     <div class="flex justify-between font-bold text-lg mt-2">
       <span>Total</span>
-      <span id="total-display"Rp {{ number_format($total + round($total * 0.11)) }}</span>
+      <span id="total-display">Rp {{ number_format($total + round($total * 0.11)) }}</span>
     </div>
   </div>
 
@@ -257,8 +257,10 @@
       });
 
     });
+  
+    const paymentMethods = @json($paymentMethods);
 
-    document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
 
     const paymentType = document.getElementById('payment_type');
     const provider = document.getElementById('provider');
@@ -268,32 +270,25 @@
         provider.innerHTML =
             '<option value="">-- Pilih Provider --</option>';
 
-          if (this.value === 'Tunai') {
+        const selectedType = this.value;
 
-            provider.innerHTML +=
-                '<option value="1">Tunai</option>';
+        const filtered = paymentMethods.filter(item => {
 
-            return;
-          }
+            if (selectedType === 'Tunai') {
+                return item.payment_method === 'Tunai';
+            }
 
-          if (this.value === 'QRIS') {
+            return item.payment_type === selectedType;
+        });
 
-            provider.innerHTML += `
-                <option value="2">Gopay</option>
-                <option value="3">ShopeePay</option>
-                <option value="4">DANA</option>
-                <option value="10">OVO</option>
-            `;
-          }
-
-          if (this.value === 'Transfer') {
+        filtered.forEach(item => {
 
             provider.innerHTML += `
-                <option value="6">Livin By Mandiri</option>
-                <option value="8">BCA Mobile</option>
-                <option value="9">BRImo</option>
+                <option value="${item.id}">
+                    ${item.provider ?? item.payment_method}
+                </option>
             `;
-          }
+        });
 
     });
 
