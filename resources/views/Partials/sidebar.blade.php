@@ -38,7 +38,14 @@
           {{ request()->routeIs('transactions.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
         <img src="{{ asset('Assets/Icons/Tl.png') }}" alt="Transaksi" class="w-5 h-5">
         <span>Transaksi</span> 
-            </a>
+        </a>
+
+        <a href="{{ route('transaction-lists.index') }}"
+          class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
+          {{ request()->routeIs('transaction-lists.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+        <img src="{{ asset('Assets/Icons/Tl.png') }}" alt="Transaksion List" class="2-5 h-5">
+        <span>Transaction List</span>
+        </a>
         
         <a href="{{ route('Staff.index') }}"
           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors

@@ -13,21 +13,21 @@ class TransactionListController extends Controller
     {
         $transactionLists = transactionList::all();
 
-        return view('transactionLists.index', compact('transactionLists'));
+        return view('transaction_list.index', compact('transactionLists'));
     }
 
     public function show($id)
     {
         $transactionList = transactionList::find($id);
 
-        return view('transactionLists.show', compact('transactionList'));
+        return view('transaction_list.show', compact('transactionList'));
     }
 
     public function edit($id)
     {
         $transactionList = transactionList::find($id);
 
-        return view('transactionLists.edit', compact('transactionList'));
+        return view('transaction_list.edit', compact('transactionList'));
     }
 
     public function update(Request $request, $id)

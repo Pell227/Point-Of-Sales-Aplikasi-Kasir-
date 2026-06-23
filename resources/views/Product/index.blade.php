@@ -105,4 +105,21 @@
 
 </div>
 
+<a href="{{ route('pos.index') }}" 
+   class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-3 rounded-full shadow-lg transition-all duration-200 hover:scale-105 active:scale-95">
+    
+    {{-- Icon Cart --}}
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <img src="{{ asset('Assets/Icons/cart.png') }}" alt="Cart" class="w-5 h-5">
+    </svg>
+    <span>Cart</span>
+
+    @php $cartCount = session('cart') ? count(session('cart')) : 0; @endphp
+    @if($cartCount > 0)
+        <span class="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full -mt-4 -mr-2">
+            {{ $cartCount }}
+        </span>
+    @endif
+</a>
+
 @endsection

@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-@section('title', 'Daftar List Transaksi')
+@section('title', 'Transaction List')
 
 @section('content')
 
-<h1>Daftar List Transaksi</h1>
+<h1>Transaction List</h1>
 
 @if (session('success'))
     <div style="color: green;">
