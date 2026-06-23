@@ -93,19 +93,45 @@
       </div>
     @endif
   </div>
-  <div class="bg-white rounded-xl shadow p-5 mb-5">
-            <h2 class="font-bold text-lg mb-3">Metode Pembayaran</h2>
-            <select name="payment_method_id" required
-                    class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="">-- Pilih Metode --</option>
-                @foreach($paymentMethods as $method)
-                    <option value="{{ $method->id }}">{{ $method->payment_method }}</option>
-                @endforeach
-            </select>
-            @error('payment_method_id')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+ <div class="bg-white rounded-xl shadow p-5 mb-5">
+
+    <h2 class="font-bold text-lg mb-3">
+        Metode Pembayaran
+    </h2>
+
+    <select id="payment_type"
+            class="w-full border rounded-lg px-3 py-2 mb-3">
+
+        <option value="">
+            -- Pilih Metode --
+        </option>
+
+        <option value="Tunai">
+            Tunai
+        </option>
+
+        <option value="QRIS">
+            QRIS
+        </option>
+
+        <option value="Transfer">
+            Transfer
+        </option>
+
+    </select>
+
+    <select id="provider"
+            name="payment_method_id"
+            required
+            class="w-full border rounded-lg px-3 py-2">
+
+        <option value="">
+            -- Pilih Provider --
+        </option>
+
+    </select>
+
+</div>
 
         {{-- Input Uang Bayar --}}
         <div class="bg-white rounded-xl shadow p-5 mb-5">
@@ -177,6 +203,102 @@
             ? 'text-red-500'
             : 'text-green-600';
     }
+
+    function updateKembalian() {
+    const bayar = parseFloat(document.getElementById('cash_given').value || 0);
+    const kembalian = bayar - finalTotal;
+    const el = document.getElementById('kembalian-display');
+
+    el.textContent = 'Rp ' + Math.max(0, kembalian).toLocaleString('id-ID');
+    el.className = kembalian < 0
+        ? 'text-red-500'
+        : 'text-green-600';
+}
+
+/* TAMBAHKAN DISINI */
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      const paymentType = document.getElementById('payment_type');
+      const provider = document.getElementById('provider');
+
+      paymentType.addEventListener('change', function () {
+
+        provider.innerHTML =
+            '<option value="">-- Pilih Provider --</option>';
+
+          if (this.value === 'Tunai') {
+
+            provider.innerHTML =
+                '<option value="1">Kasir</option>';
+
+            return;
+          }
+
+          if (this.value === 'QRIS') {
+
+            provider.innerHTML += `
+                <option value="2">Gopay</option>
+                <option value="3">Dana</option>
+                <option value="4">OVO</option>
+                <option value="5">ShopeePay</option>
+            `;
+          }
+
+          if (this.value === 'Transfer') {
+
+            provider.innerHTML += `
+                <option value="6">BCA Mobile</option>
+                <option value="7">BRImo</option>
+                <option value="8">Livin Mandiri</option>
+            `;
+          }
+
+      });
+
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+    const paymentType = document.getElementById('payment_type');
+    const provider = document.getElementById('provider');
+
+    paymentType.addEventListener('change', function () {
+
+        provider.innerHTML =
+            '<option value="">-- Pilih Provider --</option>';
+
+          if (this.value === 'Tunai') {
+
+            provider.innerHTML +=
+                '<option value="1">Tunai</option>';
+
+            return;
+          }
+
+          if (this.value === 'QRIS') {
+
+            provider.innerHTML += `
+                <option value="2">Gopay</option>
+                <option value="3">ShopeePay</option>
+                <option value="4">DANA</option>
+                <option value="10">OVO</option>
+            `;
+          }
+
+          if (this.value === 'Transfer') {
+
+            provider.innerHTML += `
+                <option value="6">Livin By Mandiri</option>
+                <option value="8">BCA Mobile</option>
+                <option value="9">BRImo</option>
+            `;
+          }
+
+    });
+
+});
+
 </script>
 @endpush
 

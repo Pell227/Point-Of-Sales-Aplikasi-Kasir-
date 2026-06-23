@@ -42,7 +42,6 @@
 
 
                 <option value="">-- Pilih --</option>
-                <option value="Cash">Cash</option>
                 <option value="QRIS">QRIS</option>
                 <option value="Transfer">Transfer</option>
 
