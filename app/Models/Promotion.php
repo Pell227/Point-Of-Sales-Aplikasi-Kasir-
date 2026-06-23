@@ -10,7 +10,7 @@ class Promotion extends Model
         'promo_name',
         'discount_type',
         'discount_value',
-        'minimum_purchase',
+        'min_purchase',
         'start_date',
         'end_date',
         'is_active'
