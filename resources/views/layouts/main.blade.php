@@ -6,6 +6,7 @@
     <title>Point Of Sales - @yield('title', 'Dashboard')</title>
     @vite('resources/css/app.css')
   </head>
+  @stack('scripts')
   <body class="bg-gray-100 font-sans antialiased">
 
     <div class="flex min-h-screen">

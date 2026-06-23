@@ -6,7 +6,6 @@
 
 <div class="grid grid-cols-12 gap-6">
 
-    <!-- Produk -->
     <div class="col-span-8">
 
         <h1 class="text-3xl font-bold mb-6">
@@ -142,12 +141,10 @@
 
                 </h3>
 
-                <button
-                    class="w-full bg-green-600 text-white mt-4 py-3 rounded-lg">
-
-                    Checkout
-
-                </button>
+                <a href="{{ route('checkout.form') }}"
+                   class="block w-full bg-green-600 hover:bg-green-700 text-white text-center mt-4 py-3 rounded-lg font-semibold transition">
+                   Checkout
+                </a>
 
             </div>
 
