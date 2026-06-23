@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\transactions;
+use App\Models\transactionlist;
 use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
@@ -26,7 +27,7 @@ class TransactionsController extends Controller
             'nameTransaction' => 'required|string|max:255',
             'amount' => 'required|numeric|min:1',
             'tax' => 'required|numeric',
-            'statustrans' => 'required|in:pending,paid,canceled',
+            'statustrans' => 'required|in:pending,paid,canceled,deleted',
             'datetrans' => 'required|date',
         ]);
 
@@ -34,6 +35,17 @@ class TransactionsController extends Controller
         $data['Transactionid'] = 'TRX-' . strtoupper(uniqid());
 
         $newTransaction = transactions::create($data);
+
+        transactionList::create([
+            'Transactionid' => $newTransaction->Transactionid,
+            'Receiptid' => 'RCT-' . strtoupper(uniqid()),
+            'Cashier_id' => auth()->user()->id,
+            'Cashier_name' => auth()->user()->name,
+            'Store_id' => 'STORE-001',
+            'Description' => $request->input('nameTransaction'),
+            'Quantity' => 1,
+            'Total' => $request->input('amount'),
+        ]);
           
         return redirect()->route('transactions.create')
                          ->with('success', 'Transaction created successfully.')
@@ -73,10 +85,12 @@ class TransactionsController extends Controller
 
     public function destroy($id)
     {
-        $transactions = transactions::find($id);
-        $transactions->delete();
+        $transaction = transactions::findOrFail($id);
+        $transaction->update([
+            'statustrans' => 'deleted'
+        ]);
 
         return redirect()->route('transactions.index')
-                         ->with('Success', 'transaction deleted successfully.');
+                         ->with('Success', 'transaction status changed successfully.');
     }
 }
