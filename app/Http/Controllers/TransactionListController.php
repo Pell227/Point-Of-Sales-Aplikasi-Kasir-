@@ -53,11 +53,6 @@ class TransactionListController extends Controller
     {
         $transactionList = transactionList::findOrFail($id);
 
-        if ($transactionList->transaction) {
-            $transactionList->transaction->update([
-                'statustrans' => 'deleted'
-            ]);
-        }
         $transactionList->delete();
 
         return redirect()->route('transaction_lists.index')

@@ -28,16 +28,13 @@ Route::get('/register', [LoginWebController::class, 'showRegister'])->name('regi
 Route::post('/register', [LoginWebController::class, 'register'])->name('register.post');
 Route::get('/change-password', [ChangePasswordController::class, 'showChangePassword'])->name('password.change');
 Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-Route::get('/main', function () {
-    return view('layouts.main');
-    });
 
 Route::middleware('auth')->group(function () {
 
     Route::resource('auth', UserWebController::class)->names('auth');
 
     Route::resource('staff',StaffController::class)->names('Staff');
-    Route::resource('products',ProductViewController::class);
+    Route::resource('products',ProductController::class);
     Route::resource('suppliers',SupplierViewController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('inventory',InventoryController::class);
