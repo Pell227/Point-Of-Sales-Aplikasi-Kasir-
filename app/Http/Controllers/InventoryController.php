@@ -75,9 +75,11 @@ class InventoryController extends Controller
         return redirect()->route('inventory.index')->with('success', 'Barang berhasil diupdate!');
     }
 
-    public function destroy(Inventory $inventory)
+    public function destroy($id)
     {
+        $inventory = Inventory::findOrFail($id);
         $inventory->delete();
+
         return redirect()->route('inventory.index')->with('success', 'Barang berhasil dihapus!');
     }
 }

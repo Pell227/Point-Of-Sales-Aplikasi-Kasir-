@@ -90,17 +90,15 @@
             </div>
 
             <div class="mt-4">
-
-                <label class="block mb-2 font-semibold">
-                    Nama File Gambar
-                </label>
-
-                <input
-                    type="text"
-                    name="image"
-                    class="w-full border rounded-lg px-4 py-3"
-                    placeholder="BigMac.webp">
-
+            <label class="block mb-2 font-semibold">
+              Kategori
+            </label>
+               <select name="category_id" class="w-full border rounded-lg px-4 py-3">
+               <option value="">-- Pilih Kategori --</option>
+             @foreach($categories as $cat)
+               <option value="{{ $cat->id }}">{{ $cat->nameK }}</option>
+              @endforeach
+             </select>
             </div>
 
             <div class="flex gap-3 mt-8">

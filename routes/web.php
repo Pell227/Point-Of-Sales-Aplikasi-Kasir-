@@ -8,7 +8,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\UserWebController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\ProductViewController;
 use App\Http\Controllers\SupplierViewController;
 use App\Http\Controllers\CategoryController;
@@ -19,6 +19,7 @@ use App\Http\Controllers\TransactionListController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\LogoutController;
 
 Route::get('/', [LoginWebController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginWebController::class, 'login'])->name('login.post');
@@ -27,26 +28,19 @@ Route::get('/register', [LoginWebController::class, 'showRegister'])->name('regi
 Route::post('/register', [LoginWebController::class, 'register'])->name('register.post');
 Route::get('/change-password', [ChangePasswordController::class, 'showChangePassword'])->name('password.change');
 Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-Route::get('/main', function () {
-    return view('layouts.main');
-    });
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('layouts.main'); 
-    })->name('dashboard');
     Route::resource('auth', UserWebController::class)->names('auth');
 
-
     Route::resource('staff',StaffController::class)->names('Staff');
-    Route::resource('products',ProductViewController::class);
+    Route::resource('products',ProductController::class);
     Route::resource('suppliers',SupplierViewController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('inventory',InventoryController::class);
     Route::resource('paymentMethods',PaymentMethodsController::class);
     Route::resource('transactions',TransactionsController::class);
-    Route::resource('transaction-lists',TransactionListController::class)->parameters(['transaction-lists' => 'transaction_list']);
+    Route::resource('transaction-lists',TransactionListController::class)->parameters(['transaction-lists' => 'transaction_lists'])->names('transaction_lists');
     Route::resource('promotions',PromotionController::class);
     Route::resource('Reports',ReportsController::class)->parameters(['Reports' => 'reports']);
     Route::resource('pos', CartController::class)->names('pos');
@@ -56,12 +50,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/add/{id}', [CartController::class, 'add'])
         ->name('cart.add');
 
-    Route::post('/cart/update/{id}', [CartController::class, 'update'])
-        ->name('cart.update');
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
-    Route::post('/cart/remove/{id}', [CartController::class, 'remove'])
-        ->name('cart.remove');
+    Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-    Route::post('/checkout', [CartController::class, 'checkout'])
-        ->name('checkout');
+    Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
+
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout.form');
+    Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');
+
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
 });
