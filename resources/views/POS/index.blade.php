@@ -25,9 +25,9 @@
                 <button
                     class="w-full bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
 
-                    <img
-                        src="{{ asset('Assets/Products/' . $product->image) }}"
-                        class="h-40 w-full object-cover">
+                        <img
+                            src="{{ asset('Assets/Products/' . ($product->image ?? 'Kosong.jpg')) }}"
+                            class="h-40 w-full object-cover">
 
                     <div class="p-4">
 

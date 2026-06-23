@@ -40,7 +40,7 @@
     <div class="bg-white rounded-xl shadow overflow-hidden">
 
         <img
-            src="{{ asset('Assets/Products/' . ($product->image ?? 'McCafe.webp')) }}"
+            src="{{ asset('Assets/Products/' . ($product->image ?? 'Kosong.jpg')) }}"
             class="h-48 w-full object-contain bg-white p-3">
 
         <div class="p-4">
