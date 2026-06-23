@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('inventory',InventoryController::class);
     Route::resource('paymentMethods',PaymentMethodsController::class);
     Route::resource('transactions',TransactionsController::class);
+    Route::resource('transaction_lists',TransactionListController::class);
     Route::resource('promotions',PromotionController::class);
     Route::resource('Reports',ReportsController::class)->parameters(['Reports' => 'reports']);
  

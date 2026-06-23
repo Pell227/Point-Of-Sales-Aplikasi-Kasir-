@@ -39,9 +39,9 @@
                     <td>{{ $list->Quantity }}</td>
                     <td>{{ $list->Total }}</td>
                     <td style="display: flex; gap: 10px;">
-                        <a href="{{ route('transaction-lists.show', ['transaction_list' => $list->id]) }}">Lihat</a> |
-                        <a href="{{ route('transaction-lists.edit', ['transaction_list' => $list->id]) }}">Edit</a> |
-                        <form action="{{ route('transaction-lists.destroy', ['transaction_list' => $list->id]) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('transaction_lists.show', ['transaction_list' => $list->id]) }}">Lihat</a> |
+                        <a href="{{ route('transaction_lists.edit', ['transaction_list' => $list->id]) }}">Edit</a> |
+                        <form action="{{ route('transaction_lists.destroy', ['transaction_list' => $list->id]) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus list transaksi ini?')">Hapus</button>

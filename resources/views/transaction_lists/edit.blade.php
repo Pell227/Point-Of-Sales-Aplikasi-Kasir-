@@ -1,6 +1,6 @@
 <h1>Edit List Transaksi</h1>
 
-<form method="POST" action="{{ route('transaction-lists.update', ['transaction_list' => $transactionLists->id]) }}">
+<form method="POST" action="{{ route('transaction_lists.update', ['transaction_list' => $transactionLists->id]) }}">
     @csrf
     @method('PUT')
 

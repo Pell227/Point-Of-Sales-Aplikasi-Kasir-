@@ -13,21 +13,21 @@ class TransactionListController extends Controller
     {
         $transactionLists = transactionList::all();
 
-        return view('transactionLists.index', compact('transactionLists'));
+        return view('transaction_lists.index', compact('transactionLists'));
     }
 
     public function show($id)
     {
         $transactionList = transactionList::find($id);
 
-        return view('transactionLists.show', compact('transactionList'));
+        return view('transaction_lists.show', compact('transactionLists'));
     }
 
     public function edit($id)
     {
         $transactionList = transactionList::find($id);
 
-        return view('transactionLists.edit', compact('transactionList'));
+        return view('transaction_lists.edit', compact('transactionLists'));
     }
 
     public function update(Request $request, $id)
@@ -45,7 +45,7 @@ class TransactionListController extends Controller
             $request->only('Cashier_name', 'Description', 'Quantity', 'Total')
         );
 
-        return redirect()->route('transactionLists.index')
+        return redirect()->route('transaction_lists.index')
                          ->with('success', 'Transaction List updated successfully.');        
     }
 
@@ -54,7 +54,7 @@ class TransactionListController extends Controller
         $transactionList = transactionList::find($id);
         $transactionList->delete();
 
-        return redirect()->route('transactionLists.index')
+        return redirect()->route('transaction_lists.index')
                          ->with('success', 'Transaction List deleted successfully.');
     }
 }
