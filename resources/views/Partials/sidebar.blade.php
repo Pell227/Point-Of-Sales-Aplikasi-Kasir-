@@ -12,6 +12,13 @@
         
         <h1 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Main Menu</h1>
 
+        <a href="{{ route('dashboard') }}"
+           class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
+          {{ request()->routeIs('dashboard') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+        <img src="{{ asset('Assets/Icons/Dashboard.png') }}" alt="Dashboard" class="w-5 h-5">
+        <span>Dashboard</span>
+        </a>
+
         <a href="{{ route('categories.index') }}"
            class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors
           {{ request()->is('categories*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">

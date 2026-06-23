@@ -8,7 +8,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\UserWebController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\ProductViewController;
 use App\Http\Controllers\SupplierViewController;
 use App\Http\Controllers\CategoryController;
@@ -34,11 +34,7 @@ Route::get('/main', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('layouts.main'); 
-    })->name('dashboard');
     Route::resource('auth', UserWebController::class)->names('auth');
-
 
     Route::resource('staff',StaffController::class)->names('Staff');
     Route::resource('products',ProductViewController::class);
@@ -60,6 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
     Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+    Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
 
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout.form');
     Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');

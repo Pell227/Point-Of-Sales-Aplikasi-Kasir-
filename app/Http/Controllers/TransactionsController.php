@@ -86,9 +86,6 @@ class TransactionsController extends Controller
     public function destroy($id)
     {
         $transaction = transactions::findOrFail($id);
-        $transaction->update([
-            'statustrans' => 'deleted'
-        ]);
 
         return redirect()->route('transactions.index')
                          ->with('Success', 'transaction status changed successfully.');

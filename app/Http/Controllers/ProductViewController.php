@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
@@ -44,9 +45,10 @@ class ProductViewController extends Controller
 
     public function edit(Product $product)
     {
+        $categories = Category::all();
         $suppliers = Supplier::all();
 
-        return view('Product.edit', compact('product', 'suppliers'));
+    return view('Product.edit', compact('product', 'categories', 'suppliers'));
     }
 
     public function update(Request $request, Product $product)

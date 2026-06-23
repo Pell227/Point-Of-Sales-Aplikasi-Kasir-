@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Promotion;
 use App\Models\PaymentMethod;
@@ -15,9 +16,10 @@ class CartController extends Controller
 {
     public function index()
     {
+        $categories = Category::where('status', 'active')->get();
         $products = Product::all();
 
-        return view('POS.index', compact('products'));
+        return view('POS.index', compact('products', 'categories'));
     }
 
     public function add($id)
