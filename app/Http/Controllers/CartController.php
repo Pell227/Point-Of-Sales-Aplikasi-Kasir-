@@ -16,7 +16,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('status', 'active')->get();
+        $categories = Category::all();
         $products = Product::all();
 
         return view('POS.index', compact('products', 'categories'));
@@ -140,7 +140,7 @@ class CartController extends Controller
         
         session()->forget('cart');
 
-        return redirect()->route('transaction-lists.index')
+        return redirect()->route('transaction_lists.index')
             ->with('success', "Transaksi $transactionId berhasil disimpan!");
     }
 }
