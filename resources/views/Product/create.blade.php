@@ -89,20 +89,6 @@
 
             </div>
 
-            <div class="mt-4">
-
-                <label class="block mb-2 font-semibold">
-                    Nama File Gambar
-                </label>
-
-                <input
-                    type="text"
-                    name="image"
-                    class="w-full border rounded-lg px-4 py-3"
-                    placeholder="BigMac.webp">
-
-            </div>
-
             <div class="flex gap-3 mt-8">
 
                 <a href="{{ route('products.index') }}"
