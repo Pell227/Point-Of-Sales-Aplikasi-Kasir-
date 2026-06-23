@@ -18,7 +18,7 @@ use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\TransactionListController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReportsController;
-
+use App\Http\Controllers\CartController;
 
 Route::get('/', [LoginWebController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginWebController::class, 'login'])->name('login.post');
@@ -49,4 +49,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('promotions',PromotionController::class);
     Route::resource('Reports',ReportsController::class)->parameters(['Reports' => 'reports']);
  
+    Route::get('/pos', [CartController::class, 'index'])->name('pos.index');
+
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])
+        ->name('cart.add');
+
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])
+        ->name('cart.update');
+
+    Route::post('/cart/remove/{id}', [CartController::class, 'remove'])
+        ->name('cart.remove');
+
+    Route::post('/checkout', [CartController::class, 'checkout'])
+        ->name('checkout');
 });
