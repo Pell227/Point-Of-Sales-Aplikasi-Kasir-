@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-@section('title', 'Daftar List Transaksi')
+@section('title', 'Transaction List')
 
 @section('content')
 
-<h1>Daftar List Transaksi</h1>
+<h1>Transaction List</h1>
 
 @if (session('success'))
     <div style="color: green;">
@@ -39,9 +39,9 @@
                     <td>{{ $list->Quantity }}</td>
                     <td>{{ $list->Total }}</td>
                     <td style="display: flex; gap: 10px;">
-                        <a href="{{ route('transaction_lists.show', ['transaction_list' => $list->id]) }}">Lihat</a> |
-                        <a href="{{ route('transaction_lists.edit', ['transaction_list' => $list->id]) }}">Edit</a> |
-                        <form action="{{ route('transaction_lists.destroy', ['transaction_list' => $list->id]) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('transaction_lists.show', $list->id) }}">Lihat</a> |
+                        <a href="{{ route('transaction_lists.edit', $list->id) }}">Edit</a> |
+                        <form action="{{ route('transaction_lists.destroy', $list->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus list transaksi ini?')">Hapus</button>

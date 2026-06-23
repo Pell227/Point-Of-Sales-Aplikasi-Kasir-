@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Promotion extends Model
 {
-    public function index()
-    {
-        $promotions = Promotion::all();
-
-        return view('promotions.index', compact('promotions'));
-    }
+    protected $fillable = [
+        'promo_name',
+        'discount_type',
+        'discount_value',
+        'minimum_purchase',
+        'start_date',
+        'end_date',
+        'is_active'
+    ];
 }

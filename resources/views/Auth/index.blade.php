@@ -1,3 +1,9 @@
+@extends('layouts.main')
+
+@section('title', 'report')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -61,3 +67,4 @@
 
 </body>
 </html>
+@endofsection

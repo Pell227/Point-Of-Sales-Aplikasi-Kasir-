@@ -1,80 +1,163 @@
+@extends('layouts.main')
+
+@section('title', 'report')
+
+@section('content')
+
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Daftar Inventory</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 </head>
-<body>
 
-    <div style="position: fixed; top: 15px; right: 20px; z-index: 9999;">
-        <form action="{{ route('logout.web') }}" method="POST">
-            @csrf
-            <button type="submit" 
-                style="background-color: red; color: white; padding: 8px 16px; 
-                    border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
-                Logout
-            </button>
-        </form>
+<body style="background-color:#f5f5f5;">
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold mb-0">Daftar Inventory Barang</h2>
+                        <div>
+                            <button type="button" class="btn btn-danger" id="btnSaktiLogoutInventory">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <a href="{{ route('inventory.create') }}"
+                           class="btn btn-primary">
+                            Tambah Barang Baru
+                        </a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th width="100">Kode</th>
+                                    <th>Nama Barang</th>
+                                    <th>Deskripsi</th>
+                                    <th>Stok</th>
+                                    <th>Harga Beli</th>
+                                    <th>Harga Jual</th>
+                                    <th width="200">Aksi</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @forelse ($inventories as $inventory)
+                                    <tr>
+                                        <td>#{{ $inventory->kode_barang }}</td>
+                                        <td>{{ $inventory->nama_barang }}</td>
+                                        <td>{{ $inventory->deskripsi }}</td>
+                                        <td>{{ $inventory->stok }}</td>
+                                        <td>Rp {{ number_format($inventory->harga_beli,0,',','.') }}</td>
+                                        <td>Rp {{ number_format($inventory->harga_jual,0,',','.') }}</td>
+
+                                        <td>
+                                            <a href="{{ route('inventory.show', $inventory->id) }}"
+                                               class="btn btn-info btn-sm text-white">
+                                                Detail
+                                            </a>
+
+                                            <a href="{{ route('inventory.edit', $inventory->id) }}"
+                                               class="btn btn-warning btn-sm text-white">
+                                                Edit
+                                            </a>
+
+                                            {{-- TOMBOL HAPUS BARU: Menggunakan class khusus untuk dibaca JavaScript Fetch --}}
+                                            <button type="button" 
+                                                    class="btn btn-danger btn-sm btn-hapus-saktai" 
+                                                    data-id="{{ $inventory->id }}">
+                                                Hapus
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            Tidak ada data barang di database.
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </div>
-    <h1>Daftar Inventory Barang</h1>
+</div>
 
-    @if(session('success'))
-        <p style="color: green; font-weight: bold;">{{ session('success') }}</p>
-    @endif
+<script>
+// ==========================================
+// 1. SCRIPT SAKTI LOGOUT
+// ==========================================
+document.getElementById('btnSaktiLogoutInventory').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    if (confirm('Apakah Anda yakin ingin logout?')) {
+        fetch('/logout-web', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            window.location.href = '/';
+        })
+        .catch(error => {
+            window.location.href = '/';
+        });
+    }
+});
 
-    <a href="{{ route('inventory.create') }}">Tambah Barang Baru</a>
-    <hr><br>
-
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Kode</th>
-                <th>Nama Barang</th>
-                <th>Deskripsi</th>
-                <th>Stok</th>
-                <th>Harga Beli</th>
-                <th>Harga Jual</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{-- Cek apakah data inventories ada dan tidak kosong --}}
-            @if(isset($inventories) && $inventories->count() > 0)
-                @foreach($inventories as $item)
-                <tr>
-                    <td>{{ $item->kode_barang }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->deskripsi ?? '-' }}</td>
-                    <td>
-                        @if($item->stok < 3)
-                            <span style="color: red; font-weight: bold;">{{ $item->stok }} !!</span>
-                        @else
-                            {{ $item->stok }}
-                        @endif
-                    </td>
-                    <td>Rp {{ number_format($item->harga_beli, 0, ',', '.') }}</td>
-                    <td>Rp {{ number_format($item->harga_jual, 0, ',', '.') }}</td>
-                    <td>
-                        {{-- Tombol Edit --}}
-                        <button type="button" onclick="window.location.href='{{ route('inventory.edit', $item->id) }}'">Edit</button>
-                        
-                        {{-- Tombol Hapus --}}
-                        <form action="{{ route('inventory.destroy', $item->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Yakin ingin menghapus?')" style="color: red">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            @else
-                <tr>
-                    <td colspan="7" style="text-align: center; color: gray;">
-                        Tidak ada data barang di database.
-                    </td>
-                </tr>
-            @endif
-        </tbody>
-    </table>
+// ==========================================
+// 2. SCRIPT SAKTI HAPUS (DELETE)
+// ==========================================
+document.querySelectorAll('.btn-hapus-saktai').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const idBarang = this.getAttribute('data-id');
+        
+        if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
+            // Menembak rute detele resource bawaan laravel secara langsung via background
+            fetch('/inventory/' + idBarang, {
+                method: 'POST', // Menggunakan POST spoofing
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _method: 'DELETE' // Memberitahu Laravel bahwa ini adalah request DELETE
+                })
+            })
+            .then(response => {
+                // Selesai menghapus, muat ulang halaman inventory agar data yang hilang sinkron
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                window.location.reload();
+            });
+        }
+    });
+});
+</script>
 </body>
 </html>
+@endsection

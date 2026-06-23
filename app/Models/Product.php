@@ -10,7 +10,8 @@ class Product extends Model
         'name',
         'stock',
         'price',
-        'supplier_id'
+        'supplier_id',
+        'image'
     ];
     
     public function supplier()

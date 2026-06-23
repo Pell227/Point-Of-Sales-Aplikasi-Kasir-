@@ -13,21 +13,21 @@ class TransactionListController extends Controller
     {
         $transactionLists = transactionList::all();
 
-        return view('transaction_lists.index', compact('transactionLists'));
+        return view('transaction-lists.index', compact('transactionLists'));
     }
 
     public function show($id)
     {
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
 
-        return view('transaction_lists.show', compact('transactionLists'));
+        return view('transaction-lists.show', compact('transactionList'));
     }
 
     public function edit($id)
     {
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
 
-        return view('transaction_lists.edit', compact('transactionLists'));
+        return view('transaction-lists.edit', compact('transactionList'));
     }
 
     public function update(Request $request, $id)
@@ -39,7 +39,7 @@ class TransactionListController extends Controller
             'Total' => 'required|numeric|min:0',
         ]);
 
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
 
         $transactionList->update(
             $request->only('Cashier_name', 'Description', 'Quantity', 'Total')
@@ -51,7 +51,13 @@ class TransactionListController extends Controller
 
     public function destroy($id)
     {
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
+
+        if ($transactionList->transaction) {
+            $transactionList->transaction->update([
+                'statustrans' => 'deleted'
+            ]);
+        }
         $transactionList->delete();
 
         return redirect()->route('transaction_lists.index')

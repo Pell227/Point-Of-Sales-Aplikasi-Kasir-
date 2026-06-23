@@ -1,56 +1,94 @@
-<h1>Tambah Metode Pembayaran</h1>
+@extends('layouts.main')
 
-<form action="{{ route('paymentMethods.store') }}" method="POST">
+@section('title', 'Tambah Metode Pembayaran')
 
-    @csrf
+@section('content')
 
-    <label>Metode Pembayaran</label>
-    <br>
+<div class="bg-white rounded-xl shadow p-6 max-w-3xl">
 
-    <select name="payment_method">
+    <h1 class="text-2xl font-bold mb-6">
+        Tambah Metode Pembayaran
+    </h1>
 
-        <option value="Tunai">Tunai</option>
-        <option value="Non Tunai">Non Tunai</option>
+    <form action="{{ route('paymentMethods.store') }}" method="POST">
 
-    </select>
+        @csrf
 
-    <br><br>
+        <div class="mb-4">
+            <label class="block mb-2">
+                Metode Pembayaran
+            </label>
 
-    <label>Jenis Pembayaran</label>
-    <br>
+            <select name="payment_method"
+                    class="w-full border rounded-lg p-2">
 
-    <select name="payment_type">
+                <option value="Tunai">Tunai</option>
+                <option value="Non Tunai">Non Tunai</option>
 
-        <option value="">-- Pilih --</option>
-        <option value="QRIS">QRIS</option>
-        <option value="Transfer">Transfer</option>
+            </select>
+        </div>
 
-    </select>
+        <div class="mb-4">
+            <label class="block mb-2">
+                Jenis Pembayaran
+            </label>
 
-    <br><br>
+            <select name="payment_type"
+                    class="w-full border rounded-lg p-2">
 
-    <label>Tipe</label>
-    <br>
+                <option value="">-- Pilih --</option>
+                <option value="QRIS">QRIS</option>
+                <option value="Transfer">Transfer</option>
 
-    <select name="payment_category">
+            </select>
+        </div>
 
-        <option value="">-- Pilih --</option>
-        <option value="E-Wallet">E-Wallet</option>
-        <option value="Mobile Banking">Mobile Banking</option>
+        <div class="mb-4">
+            <label class="block mb-2">
+                Tipe
+            </label>
 
-    </select>
+            <select name="payment_category"
+                    class="w-full border rounded-lg p-2">
 
-    <br><br>
+                <option value="">-- Pilih --</option>
+                <option value="E-Wallet">E-Wallet</option>
+                <option value="Mobile Banking">Mobile Banking</option>
 
-    <label>Provider</label>
-    <br>
+            </select>
+        </div>
 
-    <input type="text" name="provider">
+        <div class="mb-6">
+            <label class="block mb-2">
+                Provider
+            </label>
 
-    <br><br>
+            <input type="text"
+                   name="provider"
+                   class="w-full border rounded-lg p-2"
+                   placeholder="Contoh: Gopay, Dana, BCA Mobile">
+        </div>
 
-    <button type="submit">
-        Simpan
-    </button>
+        <div class="flex gap-3">
 
-</form>
+            <button type="submit"
+                    class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
+
+                Simpan
+
+            </button>
+
+            <a href="{{ route('paymentMethods.index') }}"
+               class="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600">
+
+                Kembali
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+@endsection
