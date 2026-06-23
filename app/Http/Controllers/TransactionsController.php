@@ -23,53 +23,57 @@ class TransactionsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id' => 'required|unique:transactions',
-            'name' => 'required|string|max:255',
+            'nameTransaction' => 'required|string|max:255',
             'amount' => 'required|numeric|min:1',
             'tax' => 'required|numeric',
-            'status' => 'required|in:pending,paid,completed',
-            'date' => 'required|date',
+            'statustrans' => 'required|in:pending,paid,canceled',
+            'datetrans' => 'required|date',
         ]);
 
-        transactions::create(
-            $request->only('id', 'name', 'amount', 'tax', 'status', 'date')
-        );
+        $data = $request->only('nameTransaction', 'amount', 'tax', 'statustrans', 'datetrans');
+        $data['Transactionid'] = 'TRX-' . strtoupper(uniqid());
 
-        return redirect()->route('transactions.index')
-                         ->with('success', 'Transaction created successfully.');
+        $newTransaction = transactions::create($data);
+          
+        return redirect()->route('transactions.create')
+                         ->with('success', 'Transaction created successfully.')
+                         ->with('created_transaction', $newTransaction->toArray());
     }
 
-    public function show(transactions $transactions)
+    public function show($id)
     {
+        $transactions = transactions::find($id);
         return view('transactions.show', compact('transactions'));
     }
 
-    public function edit(transactions $transactions)
+    public function edit($id)
     {
+        $transactions = transactions::find($id);
         return view('transactions.edit', compact('transactions'));
     }
 
-    public function update(Request $request, transactions $transactions)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'id' => 'required|unique:transactions',
-            'name' => 'required|string|max:255',
+            'nameTransaction' => 'required|string|max:255',
             'amount' => 'required|numeric|min:1',
             'tax' => 'required|numeric',
-            'status' => 'required|in:pending,paid,completed',
-            'date' => 'required|date',
+            'statustrans' => 'required|in:pending,paid,canceled',
         ]);
 
+        $transactions = transactions::find($id);
+
         $transactions->update(
-            $request->only('id', 'name', 'amount', 'tax', 'status', 'date')
+            $request->only('nameTransaction', 'amount', 'tax', 'statustrans')
         );
 
         return redirect()->route('transactions.index')
                          ->with('success', 'Transaction updated successfully.');
     }
 
-    public function destroy(transactions $transactions)
+    public function destroy($id)
     {
+        $transactions = transactions::find($id);
         $transactions->delete();
 
         return redirect()->route('transactions.index')
