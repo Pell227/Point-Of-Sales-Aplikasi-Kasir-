@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nameTransaction');
             $table->integer('amount');
             $table->integer('tax');
-            $table->enum('statustrans', ['pending', 'Paid', 'canceled']);
+            $table->enum('statustrans', ['pending', 'Paid', 'canceled', 'Deleted']);
             $table->date('datetrans');
 
             $table->timestamps();

@@ -13,21 +13,21 @@ class TransactionListController extends Controller
     {
         $transactionLists = transactionList::all();
 
-        return view('transaction_list.index', compact('transactionLists'));
+        return view('transaction-lists.index', compact('transactionLists'));
     }
 
     public function show($id)
     {
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
 
-        return view('transaction_list.show', compact('transactionList'));
+        return view('transaction-lists.show', compact('transactionList'));
     }
 
     public function edit($id)
     {
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
 
-        return view('transaction_list.edit', compact('transactionList'));
+        return view('transaction-lists.edit', compact('transactionList'));
     }
 
     public function update(Request $request, $id)
@@ -39,22 +39,28 @@ class TransactionListController extends Controller
             'Total' => 'required|numeric|min:0',
         ]);
 
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
 
         $transactionList->update(
             $request->only('Cashier_name', 'Description', 'Quantity', 'Total')
         );
 
-        return redirect()->route('transactionLists.index')
+        return redirect()->route('transaction_lists.index')
                          ->with('success', 'Transaction List updated successfully.');        
     }
 
     public function destroy($id)
     {
-        $transactionList = transactionList::find($id);
+        $transactionList = transactionList::findOrFail($id);
+
+        if ($transactionList->transaction) {
+            $transactionList->transaction->update([
+                'statustrans' => 'deleted'
+            ]);
+        }
         $transactionList->delete();
 
-        return redirect()->route('transactionLists.index')
+        return redirect()->route('transaction_lists.index')
                          ->with('success', 'Transaction List deleted successfully.');
     }
 }

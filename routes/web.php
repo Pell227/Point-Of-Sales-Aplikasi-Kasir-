@@ -19,6 +19,7 @@ use App\Http\Controllers\TransactionListController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\LogoutController;
 
 Route::get('/', [LoginWebController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginWebController::class, 'login'])->name('login.post');
@@ -46,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('inventory',InventoryController::class);
     Route::resource('paymentMethods',PaymentMethodsController::class);
     Route::resource('transactions',TransactionsController::class);
-    Route::resource('transaction-lists',TransactionListController::class)->parameters(['transaction-lists' => 'transaction_list']);
+    Route::resource('transaction-lists',TransactionListController::class)->parameters(['transaction-lists' => 'transaction_lists'])->names('transaction_lists');
     Route::resource('promotions',PromotionController::class);
     Route::resource('Reports',ReportsController::class)->parameters(['Reports' => 'reports']);
     Route::resource('pos', CartController::class)->names('pos');
@@ -62,4 +63,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout.form');
     Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');
+
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
 });

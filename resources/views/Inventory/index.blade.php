@@ -24,11 +24,6 @@
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="fw-bold mb-0">Daftar Inventory Barang</h2>
-                        <div>
-                            <button type="button" class="btn btn-danger" id="btnSaktiLogoutInventory">
-                                Logout
-                            </button>
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -73,12 +68,13 @@
                                                 Edit
                                             </a>
 
-                                            {{-- TOMBOL HAPUS BARU: Menggunakan class khusus untuk dibaca JavaScript Fetch --}}
-                                            <button type="button" 
-                                                    class="btn btn-danger btn-sm btn-hapus-saktai" 
-                                                    data-id="{{ $inventory->id }}">
-                                                Hapus
-                                            </button>
+                                            <form action="{{ route('inventory.destroy', $inventory->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    Hapus
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
@@ -100,9 +96,6 @@
 </div>
 
 <script>
-// ==========================================
-// 1. SCRIPT SAKTI LOGOUT
-// ==========================================
 document.getElementById('btnSaktiLogoutInventory').addEventListener('click', function(e) {
     e.preventDefault();
     
@@ -127,14 +120,15 @@ document.getElementById('btnSaktiLogoutInventory').addEventListener('click', fun
 // ==========================================
 // 2. SCRIPT SAKTI HAPUS (DELETE)
 // ==========================================
-document.querySelectorAll('.btn-hapus-saktai').forEach(button => {
+// PERBAIKAN: Memastikan class selector sesuai dengan elemen HTML (btn-hapus-sakti)
+document.querySelectorAll('.btn-hapus-sakti').forEach(button => {
     button.addEventListener('click', function(e) {
         e.preventDefault();
         
         const idBarang = this.getAttribute('data-id');
         
         if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
-            // Menembak rute detele resource bawaan laravel secara langsung via background
+            // Menembak rute delete resource bawaan laravel secara langsung via background
             fetch('/inventory/' + idBarang, {
                 method: 'POST', // Menggunakan POST spoofing
                 headers: {
@@ -143,11 +137,10 @@ document.querySelectorAll('.btn-hapus-saktai').forEach(button => {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    _method: 'DELETE' // Memberitahu Laravel bahwa ini adalah request DELETE
+                    _method: 'DELETE'
                 })
             })
             .then(response => {
-                // Selesai menghapus, muat ulang halaman inventory agar data yang hilang sinkron
                 window.location.reload();
             })
             .catch(error => {

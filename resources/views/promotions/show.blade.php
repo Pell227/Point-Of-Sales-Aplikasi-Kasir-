@@ -1,50 +1,87 @@
-<h1>Tambah Promo</h1>
+@extends('layouts.main')
 
-<form action="{{ route('promotions.store') }}" method="POST">
-    @csrf
+@section('title', 'Detail Promo')
 
-    <label>Nama Promo</label><br>
-    <input type="text" name="promo_name">
+@section('content')
 
-    <br><br>
+<div class="bg-white rounded-xl shadow p-6 max-w-4xl">
 
-    <label>Jenis Diskon</label><br>
-    <select name="discount_type">
-        <option value="percentage">Persentase</option>
-        <option value="fixed">Nominal</option>
-    </select>
+    <h1 class="text-2xl font-bold mb-6">
+        Detail Promo
+    </h1>
 
-    <br><br>
+    <div class="grid grid-cols-2 gap-6">
 
-    <label>Nilai Diskon</label><br>
-    <input type="number" name="discount_value">
+        <div>
+            <p class="text-gray-500">Nama Promo</p>
+            <p class="font-semibold">{{ $promotion->promo_name }}</p>
+        </div>
 
-    <br><br>
+        <div>
+            <p class="text-gray-500">Jenis Diskon</p>
+            <p class="font-semibold">{{ $promotion->discount_type }}</p>
+        </div>
 
-    <label>Minimal Belanja</label><br>
-    <input type="number" name="minimum_purchase">
+        <div>
+            <p class="text-gray-500">Nilai Diskon</p>
+            <p class="font-semibold">
+                {{ $promotion->discount_value }}
+            </p>
+        </div>
 
-    <br><br>
+        <div>
+            <p class="text-gray-500">Minimal Belanja</p>
+            <p class="font-semibold">
+                {{ $promotion->min_purchase }}
+            </p>
+        </div>
 
-    <label>Tanggal Mulai</label><br>
-    <input type="date" name="start_date">
+        <div>
+            <p class="text-gray-500">Tanggal Mulai</p>
+            <p class="font-semibold">
+                {{ $promotion->start_date }}
+            </p>
+        </div>
 
-    <br><br>
+        <div>
+            <p class="text-gray-500">Tanggal Selesai</p>
+            <p class="font-semibold">
+                {{ $promotion->end_date }}
+            </p>
+        </div>
 
-    <label>Tanggal Selesai</label><br>
-    <input type="date" name="end_date">
+        <div>
+            <p class="text-gray-500">Status</p>
 
-    <br><br>
+            @if($promotion->is_active)
 
-    <label>Status</label><br>
-    <select name="is_active">
-        <option value="1">Aktif</option>
-        <option value="0">Tidak Aktif</option>
-    </select>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                    Aktif
+                </span>
 
-    <br><br>
+            @else
 
-    <button type="submit">
-        Simpan
-    </button>
-</form>
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                    Tidak Aktif
+                </span>
+
+            @endif
+
+        </div>
+
+    </div>
+
+    <div class="mt-6">
+
+        <a href="{{ route('promotions.index') }}"
+           class="bg-gray-600 text-white px-4 py-2 rounded-lg">
+
+            Kembali
+
+        </a>
+
+    </div>
+
+</div>
+
+@endsection

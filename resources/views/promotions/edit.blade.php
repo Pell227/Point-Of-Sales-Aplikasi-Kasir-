@@ -1,95 +1,156 @@
-<h1>Edit Promo</h1>
+@extends('layouts.main')
 
-<form action="{{ route('promotions.update', $promotion->id) }}"
-      method="POST">
+@section('title', 'Edit Promo')
 
-    @csrf
-    @method('PUT')
+@section('content')
 
-    <label>Nama Promo</label>
-    <br>
-    <input type="text"
-           name="promo_name"
-           value="{{ $promotion->promo_name }}">
+<div class="bg-white rounded-xl shadow p-6 max-w-3xl">
 
-    <br><br>
+    <h1 class="text-2xl font-bold mb-6">
+        Edit Promo
+    </h1>
 
-    <label>Jenis Diskon</label>
-    <br>
+    <form action="{{ route('promotions.update', $promotion->id) }}"
+          method="POST">
 
-    <select name="discount_type">
+        @csrf
+        @method('PUT')
 
-        <option value="percentage"
-            {{ $promotion->discount_type == 'percentage' ? 'selected' : '' }}>
-            Persentase
-        </option>
+        <div class="mb-4">
 
-        <option value="fixed"
-            {{ $promotion->discount_type == 'fixed' ? 'selected' : '' }}>
-            Nominal
-        </option>
+            <label class="block mb-2">
+                Nama Promo
+            </label>
 
-    </select>
+            <input type="text"
+                   name="promo_name"
+                   value="{{ $promotion->promo_name }}"
+                   class="w-full border rounded-lg p-2">
 
-    <br><br>
+        </div>
 
-    <label>Nilai Diskon</label>
-    <br>
+        <div class="mb-4">
 
-    <input type="number"
-           name="discount_value"
-           value="{{ $promotion->discount_value }}">
+            <label class="block mb-2">
+                Jenis Diskon
+            </label>
 
-    <br><br>
+            <select name="discount_type"
+                    class="w-full border rounded-lg p-2">
 
-    <label>Minimal Belanja</label>
-    <br>
+                <option value="percentage"
+                    {{ $promotion->discount_type == 'percentage' ? 'selected' : '' }}>
+                    Persentase
+                </option>
 
-    <input type="number"
-           name="minimum_purchase"
-           value="{{ $promotion->minimum_purchase }}">
+                <option value="fixed"
+                    {{ $promotion->discount_type == 'fixed' ? 'selected' : '' }}>
+                    Nominal
+                </option>
 
-    <br><br>
+            </select>
 
-    <label>Tanggal Mulai</label>
-    <br>
+        </div>
 
-    <input type="date"
-           name="start_date"
-           value="{{ $promotion->start_date }}">
+        <div class="mb-4">
 
-    <br><br>
+            <label class="block mb-2">
+                Nilai Diskon
+            </label>
 
-    <label>Tanggal Selesai</label>
-    <br>
+            <input type="number"
+                   name="discount_value"
+                   value="{{ $promotion->discount_value }}"
+                   class="w-full border rounded-lg p-2">
 
-    <input type="date"
-           name="end_date"
-           value="{{ $promotion->end_date }}">
+        </div>
 
-    <br><br>
+        <div class="mb-4">
 
-    <label>Status</label>
-    <br>
+            <label class="block mb-2">
+                Minimal Belanja
+            </label>
 
-    <select name="is_active">
+            <input type="number"
+                    name="min_purchase"
+                    value="{{ $promotion->min_purchase }}"
+                    class="w-full border rounded-lg p-2">
 
-        <option value="1"
-            {{ $promotion->is_active ? 'selected' : '' }}>
-            Aktif
-        </option>
+        </div>
 
-        <option value="0"
-            {{ !$promotion->is_active ? 'selected' : '' }}>
-            Tidak Aktif
-        </option>
+        <div class="grid grid-cols-2 gap-4">
 
-    </select>
+            <div>
 
-    <br><br>
+                <label class="block mb-2">
+                    Tanggal Mulai
+                </label>
 
-    <button type="submit">
-        Update
-    </button>
+                <input type="date"
+                       name="start_date"
+                       value="{{ $promotion->start_date }}"
+                       class="w-full border rounded-lg p-2">
 
-</form>
+            </div>
+
+            <div>
+
+                <label class="block mb-2">
+                    Tanggal Selesai
+                </label>
+
+                <input type="date"
+                       name="end_date"
+                       value="{{ $promotion->end_date }}"
+                       class="w-full border rounded-lg p-2">
+
+            </div>
+
+        </div>
+
+        <div class="mt-4 mb-6">
+
+            <label class="block mb-2">
+                Status
+            </label>
+
+            <select name="is_active"
+                    class="w-full border rounded-lg p-2">
+
+                <option value="1"
+                    {{ $promotion->is_active ? 'selected' : '' }}>
+                    Aktif
+                </option>
+
+                <option value="0"
+                    {{ !$promotion->is_active ? 'selected' : '' }}>
+                    Tidak Aktif
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="flex gap-3">
+
+            <button type="submit"
+                    class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
+
+                Update Promo
+
+            </button>
+
+            <a href="{{ route('promotions.index') }}"
+               class="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600">
+
+                Kembali
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+@endsection
