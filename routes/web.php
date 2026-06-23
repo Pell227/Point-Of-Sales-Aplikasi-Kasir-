@@ -28,9 +28,6 @@ Route::get('/register', [LoginWebController::class, 'showRegister'])->name('regi
 Route::post('/register', [LoginWebController::class, 'register'])->name('register.post');
 Route::get('/change-password', [ChangePasswordController::class, 'showChangePassword'])->name('password.change');
 Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-Route::get('/main', function () {
-    return view('layouts.main');
-    });
 
 Route::middleware('auth')->group(function () {
 
